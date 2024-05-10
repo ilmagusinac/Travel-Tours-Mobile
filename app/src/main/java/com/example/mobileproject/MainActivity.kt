@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobileproject.ui.theme.MobileProjectTheme
 
 import com.example.mobileproject.ui.screen.ProfileScreen
+import com.example.mobileproject.ui.screen.EditProfileScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
                 ) {
 
                     ProfileScreen()
-                    //HomeScreen()
+                    EditProfileScreen()
                 }
             }
         }
