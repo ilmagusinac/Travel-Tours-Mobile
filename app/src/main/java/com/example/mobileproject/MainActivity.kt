@@ -13,6 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobileproject.ui.theme.MobileProjectTheme
 
 import com.example.mobileproject.ui.screen.ProfileScreen
+import com.example.mobileproject.ui.screen.HomeScreen
+import com.example.mobileproject.ui.screen.LoginScreen
+import com.example.mobileproject.ui.screen.AboutScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +27,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
-                    ProfileScreen()
+                    //LoginScreen()
+                    //ProfileScreen()
                     //HomeScreen()
+                    AboutScreen()
                 }
             }
         }
@@ -46,5 +50,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingPreview() {
     MobileProjectTheme {
         Greeting("Android")
+        AboutScreen()
     }
 }

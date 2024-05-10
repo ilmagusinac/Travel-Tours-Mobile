@@ -1,5 +1,6 @@
 package com.example.mobileproject.ui.screen
 
+import android.content.res.Configuration
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
@@ -39,8 +40,8 @@ import com.example.mobileproject.R
 import com.example.mobileproject.ui.theme.MobileProjectTheme
 import androidx.compose.ui.text.TextStyle
 
-//@Composable
-/*
+@Composable
+
 fun LoginScreen() {
     Column(
         modifier = Modifier
@@ -190,7 +191,7 @@ fun CustomButton(
         content()
     }
 }
-//@Preview( showBackground = false, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview( showBackground = false, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @RequiresApi(Build.VERSION_CODES.O) //ŠTA JE OVO?
 @Preview( showBackground = true)
 @Composable
@@ -199,4 +200,3 @@ fun LoginScreenPreview(){
         LoginScreen()
     }
 }
-*/
