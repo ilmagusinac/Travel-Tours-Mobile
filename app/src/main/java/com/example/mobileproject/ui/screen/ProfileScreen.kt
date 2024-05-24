@@ -274,7 +274,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
         modifier = Modifier
             .align(Alignment.TopStart)
             .offset(x = 167.dp, y = 775.dp)
-            .requiredWidth(97.dp)
+            .requiredWidth(150.dp)
             .requiredHeight(26.dp)
             .clickable { /* Handle button click here */ }
             .background(color = Color.Transparent)
