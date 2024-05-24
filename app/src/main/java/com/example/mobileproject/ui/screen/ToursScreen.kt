@@ -2,6 +2,7 @@ package com.example.mobileproject.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -299,7 +300,7 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                     Image(
                         painter = painterResource(id = R.drawable.tour1),
                         contentDescription = "Photo",
-                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp))
+                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp)).clickable {  }
                     )
 
                     // Title and description 1
@@ -334,7 +335,7 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                     Image(
                         painter = painterResource(id = R.drawable.tour4),
                         contentDescription = "Photo",
-                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp))
+                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp)).clickable {  }
                     )
 
                     // Title and description
@@ -381,7 +382,7 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                     Image(
                         painter = painterResource(id = R.drawable.tour3),
                         contentDescription = "Photo",
-                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp))
+                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp)).clickable {  }
                     )
 
                     // Title and description
@@ -417,7 +418,7 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                     Image(
                         painter = painterResource(id = R.drawable.tour2),
                         contentDescription = "Photo",
-                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp))
+                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp)).clickable {  }
                     )
 
                     // Title and description
