@@ -344,7 +344,6 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                     Text(
                         text = "At Travel&Tours, we're dedicated to redefining travel experiences. " +
                                 "Our app offers personalised journeys tailored to your interests, from cultural immersion to adventure. " +
-                                "Explore curated attractions and create bespoke itineraries effortlessly. " +
                                 "Let us transform your wanderlust into unforgettable memories. " +
                                 "Discover more with Travel&Tours.",
                         color = Color.Black,
