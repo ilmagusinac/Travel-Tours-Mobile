@@ -2,6 +2,7 @@ package com.example.mobileproject.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.offset
@@ -183,7 +184,7 @@ fun SignInPage(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
                 .offset(
-                    x = 60.0001220703125.dp,
+                    x = 60.dp,
                     y = 644.dp
                 )
                 .requiredWidth(width = 287.dp)
@@ -200,6 +201,7 @@ fun SignInPage(modifier: Modifier = Modifier) {
                     //.align(alignment = Alignment.TopStart)
                     .offset(x = 50.dp,
                         y = 10.dp)
+                    .clickable {  }
             )
             Icon(
                 painter = painterResource(id = R.drawable.more_circle),
@@ -212,6 +214,7 @@ fun SignInPage(modifier: Modifier = Modifier) {
                         y = 0.dp
                     )
                     .requiredSize(size = 20.dp))
+
         }
         Text(
             text = "Sign in",
