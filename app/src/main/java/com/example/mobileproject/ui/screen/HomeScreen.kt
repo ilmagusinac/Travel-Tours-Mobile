@@ -108,13 +108,13 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                             Icon(
                                 painter = painterResource(id = R.drawable.homeoutline),
                                 contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
+                                tint = Color(0xff0373f3), // Set the color of the Icon
                                 modifier = Modifier.fillMaxSize()
                             )
                         }
                         Text(
                             text = "Home",
-                            color = Color(0xffbcbcbc),
+                            color = Color(0xff0373f3),
                             style = TextStyle(
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Bold
@@ -222,13 +222,13 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                             Icon(
                                 painter = painterResource(id = R.drawable.usercircleoutline),
                                 contentDescription = "Vector",
-                                tint = Color(0xff0373f3), // Set the color of the Icon
+                                tint = Color(0xffbcbcbc), // Set the color of the Icon
                                 modifier = Modifier.fillMaxSize()
                             )
                         }
                         Text(
                             text = "Profile",
-                            color = Color(0xff0373f3),
+                            color = Color(0xffbcbcbc),
                             style = TextStyle(
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Bold

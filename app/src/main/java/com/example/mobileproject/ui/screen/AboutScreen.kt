@@ -171,7 +171,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                             Icon(
                                 painter = painterResource(id = R.drawable.mailopenoutline),
                                 contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
+                                tint = Color(0xff0373f3), // Set the color of the Icon
                                 modifier = Modifier
                                     .fillMaxSize()
                                 //.border(border = BorderStroke(1.5.dp, Color(0xffbcbcbc)))
@@ -179,7 +179,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                         }
                         Text(
                             text = "About",
-                            color = Color(0xffbcbcbc),
+                            color = Color(0xff0373f3),
                             style = androidx.compose.ui.text.TextStyle(
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Bold
@@ -207,13 +207,13 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                             Icon(
                                 painter = painterResource(id = R.drawable.usercircleoutline),
                                 contentDescription = "Vector",
-                                tint = Color(0xff0373f3), // Set the color of the Icon
+                                tint = Color(0xffbcbcbc), // Set the color of the Icon
                                 modifier = Modifier.fillMaxSize()
                             )
                         }
                         Text(
                             text = "Profile",
-                            color = Color(0xff0373f3),
+                            color = Color(0xffbcbcbc),
                             style = androidx.compose.ui.text.TextStyle(
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Bold
