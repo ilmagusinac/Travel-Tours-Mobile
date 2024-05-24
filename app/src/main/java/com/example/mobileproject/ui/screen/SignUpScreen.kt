@@ -1,6 +1,7 @@
 package com.example.mobileproject.ui.screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.offset
@@ -302,7 +303,10 @@ fun SignUpPage(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     //.align(alignment = Alignment.TopStart)
                     .offset(x = 50.dp,
-                        y = 10.dp))
+                        y = 10.dp)
+                    .clickable { }
+            )
+
             Icon(
                 painter = painterResource(id = R.drawable.more_circle),
                 contentDescription = "More Circle",
