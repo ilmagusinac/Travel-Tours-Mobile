@@ -524,14 +524,6 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clip(shape = CircleShape)
-                                .background(
-                                    brush = Brush.linearGradient(
-                                        0f to Color(0xff18acfe),
-                                        1f to Color(0xff0163e0),
-                                        start = Offset(14f, 0f),
-                                        end = Offset(14f, 27.92f)
-                                    )
-                                )
                         )
                         Image(
                             painter = painterResource(id = R.drawable.facebook),
@@ -592,14 +584,6 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clip(shape = CircleShape)
-                                .background(
-                                    brush = Brush.linearGradient(
-                                        0f to Color(0xff18acfe),
-                                        1f to Color(0xff0163e0),
-                                        start = Offset(14f, 0f),
-                                        end = Offset(14f, 27.92f)
-                                    )
-                                )
                         )
                         Image(
                             painter = painterResource(id = R.drawable.pinterest),
@@ -663,14 +647,6 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clip(shape = CircleShape)
-                                .background(
-                                    brush = Brush.linearGradient(
-                                        0f to Color(0xff18acfe),
-                                        1f to Color(0xff0163e0),
-                                        start = Offset(14f, 0f),
-                                        end = Offset(14f, 27.92f)
-                                    )
-                                )
                         )
                         Image(
                             painter = painterResource(id = R.drawable.instagram),
