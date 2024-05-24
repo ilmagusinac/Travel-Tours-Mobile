@@ -2,6 +2,7 @@ package com.example.mobileproject.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -496,6 +497,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .align(alignment = Alignment.TopStart)
                             .offset(x = 72.dp, y = 2.dp)
+                            .clickable {  }
                     )
                     Text(
                         text = "Limited time paid promotion",
@@ -529,6 +531,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                             painter = painterResource(id = R.drawable.facebook),
                             contentDescription = "f",
                             modifier = Modifier.fillMaxSize()
+                                .clickable {  }
                         )
                     }
                 }
@@ -556,6 +559,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .align(alignment = Alignment.TopStart)
                             .offset(x = 72.dp, y = 2.dp)
+                            .clickable {  }
                     )
                     Text(
                         text = "Promote your blog for free",
@@ -589,6 +593,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                             painter = painterResource(id = R.drawable.pinterest),
                             contentDescription = "f",
                             modifier = Modifier.fillMaxSize()
+                                .clickable {  }
                         )
                     }
                 }
@@ -619,6 +624,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .align(alignment = Alignment.TopStart)
                             .offset(x = 72.dp, y = 2.dp)
+                            .clickable {}
                     )
                     Text(
                         text = "Promote your blog for free",
@@ -652,6 +658,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                             painter = painterResource(id = R.drawable.instagram),
                             contentDescription = "f",
                             modifier = Modifier.fillMaxSize()
+                                .clickable {  }
                         )
                     }
                 }
