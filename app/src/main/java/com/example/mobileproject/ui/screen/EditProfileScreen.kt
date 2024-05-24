@@ -29,6 +29,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,7 +51,7 @@ import com.example.mobileproject.ui.theme.MobileProjectTheme
 @Composable
 fun EditProfileScreen(modifier: Modifier = Modifier) {
     var text by remember { mutableStateOf("")}
-    var text1 by remember { mutableStateOf("")}
+    var text2 by remember { mutableStateOf("")}
 
 //dialog popup //
     Box( //NAVIGATION BOX
@@ -279,7 +280,7 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                 .padding(start = 32.dp, top = 300.dp)
         ) {
             Text(
-                text = "E-mail address",
+                text = "Enter new e-mail address",
                 color = Color(0xffadadad),
                 style = TextStyle(fontSize = 14.sp)
             )
@@ -289,24 +290,15 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                     .requiredWidth(width = 355.dp)
                     .requiredHeight(height = 51.dp)
                     .clip(shape = RoundedCornerShape(36.dp))
-                    //.background(color = Color.White)
+                    .background(color = Color.White)
                     .border(border = BorderStroke(1.dp, Color(0xffe9e9e9)), shape = RoundedCornerShape(36.dp))
             ) {
                 TextField(
                     value = text,
                     onValueChange = { text = it },
-                    label = {
-                        Text(
-                            text = "ilma.gusinac@stu.ibu.edu.ba",
-                            color = Color(0xffadadad),
-                            style = TextStyle(fontSize = 16.sp),
-                            modifier = Modifier.align(alignment = Alignment.TopStart).offset(x = 20.dp)
-                        )
-                    },
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(start = 15.dp)
-                        //.background(color = Color.White)
+                        .padding(start = 55.dp)
                 )
 
                 Icon(
@@ -319,7 +311,7 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
             }
 
             Text(
-                text = "Username",
+                text = "Enter new username",
                 color = Color(0xffadadad),
                 style = TextStyle(fontSize = 14.sp),
                 modifier = Modifier.padding(top = 61.dp)
@@ -331,20 +323,12 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                     .requiredWidth(width = 355.dp)
                     .requiredHeight(height = 51.dp)
                     .clip(shape = RoundedCornerShape(36.dp))
-                    //.background(color = Color.White)
+                    .background(color = Color.White)
                     .border(border = BorderStroke(1.dp, Color(0xffe9e9e9)), shape = RoundedCornerShape(36.dp))
             ) {
                 TextField(
-                    value = text,
-                    onValueChange = { text = it },
-                    label = {
-                        Text(
-                            text = "ilmagusinac",
-                            color = Color(0xffadadad),
-                            style = TextStyle(fontSize = 16.sp),
-                            modifier = Modifier.align(alignment = Alignment.TopStart).offset(x = 20.dp)
-                        )
-                    },
+                    value = text2,
+                    onValueChange = { text2 = it },
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(start = 55.dp)

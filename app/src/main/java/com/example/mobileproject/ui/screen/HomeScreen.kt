@@ -13,13 +13,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,7 +54,194 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.withStyle
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(modifier: Modifier = Modifier) {
+
+    /*NAVIGATION*/
+    Box( //NAVIGATION BOX
+        modifier = modifier
+            //.requiredWidth(width = 430.dp)
+            .fillMaxWidth()
+            .requiredHeight(height = 932.dp)
+
+            .background(color = Color(0xfff6f6f6))
+    ) {
+        NavigationBar(
+            modifier = Modifier
+                .align(alignment = Alignment.TopStart)
+                .offset(
+                    x = 0.dp,
+                    y = 825.dp
+                )
+        ) {
+            Box(
+                modifier = Modifier
+                    //.requiredWidth(width = 430.dp)
+                    .fillMaxWidth()
+                    .requiredHeight(height = 107.dp)
+                //.fillMaxSize()
+            ) {
+                Box(
+                    modifier = Modifier
+                        //.requiredWidth(width = 430.dp)
+                        .fillMaxWidth()
+                        .requiredHeight(height = 107.dp)
+                        .clip(shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
+                        .background(color = Color.White)
+                )
+
+                IconButton( //HOME BUTTON
+                    onClick = { },
+
+                    modifier = Modifier
+                        .size(90.dp)
+                        .align(alignment = Alignment.TopStart)
+                        .offset(x = 10.dp, y = 8.dp)
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Box(
+                            modifier = Modifier.requiredSize(size = 30.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.homeoutline),
+                                contentDescription = "Vector",
+                                tint = Color(0xffbcbcbc), // Set the color of the Icon
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
+                        Text(
+                            text = "Home",
+                            color = Color(0xffbcbcbc),
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
+                        )
+                    }
+                }
+
+                IconButton( //TOURS BUTTON
+                    onClick = { },
+                    modifier = Modifier
+                        .size(90.dp)
+                        .align(alignment = Alignment.TopStart)
+                        .offset(
+                            x = 110.dp,
+                            y = 8.dp
+                        )
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .requiredSize(size = 30.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.calendaroutline),
+                                contentDescription = "Vector",
+                                tint = Color(0xffbcbcbc), // Set the color of the Icon
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                //.border(border = BorderStroke(1.5.dp, Color(0xffbcbcbc)))
+                            )
+                        }
+                        Text(
+                            text = "Tours",
+                            color = Color(0xffbcbcbc),
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
+                        )
+                    }
+                }
+
+                IconButton( //ABOUT BUTTON
+                    onClick = { },
+                    modifier = Modifier
+                        .size(90.dp)
+                        .align(alignment = Alignment.TopStart)
+                        .offset(
+                            x = 220.dp,
+                            y = 8.dp
+                        )
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .requiredSize(size = 30.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.mailopenoutline),
+                                contentDescription = "Vector",
+                                tint = Color(0xffbcbcbc), // Set the color of the Icon
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                //.border(border = BorderStroke(1.5.dp, Color(0xffbcbcbc)))
+                            )
+                        }
+                        Text(
+                            text = "About",
+                            color = Color(0xffbcbcbc),
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
+                        )
+                    }
+                }
+
+                IconButton( //PROFILE BUTTON
+                    onClick = { },
+                    modifier = Modifier
+                        .size(90.dp)
+                        .align(alignment = Alignment.TopStart)
+                        .offset(x = 320.dp, y = 8.dp)
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Box(
+                            modifier = Modifier.requiredSize(size = 30.dp)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.usercircleoutline),
+                                contentDescription = "Vector",
+                                tint = Color(0xff0373f3), // Set the color of the Icon
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
+                        Text(
+                            text = "Profile",
+                            color = Color(0xff0373f3),
+                            style = TextStyle(
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+        /*END OF NAVIGATION*/
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -197,9 +390,9 @@ fun ScrollableText() {
 */
 
 
-@Preview( showBackground = false, uiMode = Configuration.UI_MODE_NIGHT_YES)
+//@Preview( showBackground = false, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @RequiresApi(Build.VERSION_CODES.O) //ŠTA JE OVO?
-@Preview( showBackground = true)
+@Preview(widthDp = 430, heightDp = 932)
 @Composable
 fun HomeScreenPreview(){
     MobileProjectTheme {

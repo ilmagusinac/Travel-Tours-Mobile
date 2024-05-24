@@ -15,7 +15,6 @@ import com.example.mobileproject.ui.theme.MobileProjectTheme
 import com.example.mobileproject.ui.screen.ProfileScreen
 
 import com.example.mobileproject.ui.screen.HomeScreen
-import com.example.mobileproject.ui.screen.LoginScreen
 import com.example.mobileproject.ui.screen.AboutScreen
 
 import com.example.mobileproject.ui.screen.EditProfileScreen
@@ -35,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     //LoginScreen()
                     ProfileScreen()
                     HomeScreen()
-                    //AboutScreen()
+                    AboutScreen()
                     ProfileScreen()
                     EditProfileScreen()
                 }
