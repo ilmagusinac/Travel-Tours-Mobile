@@ -13,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.mobileproject.ui.theme.MobileProjectTheme
 
 import com.example.mobileproject.ui.screen.ProfileScreen
+import com.example.mobileproject.ui.screen.ToursScreen
 
 import com.example.mobileproject.ui.screen.HomeScreen
 import com.example.mobileproject.ui.screen.AboutScreen
@@ -33,10 +34,15 @@ class MainActivity : ComponentActivity() {
 
                     //LoginScreen()
                     ProfileScreen()
+
                     HomeScreen()
                     AboutScreen()
                     ProfileScreen()
                     EditProfileScreen()
+
+                    ToursScreen()
+                    
+
                 }
             }
         }
