@@ -69,7 +69,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
             .background(color = Color(0xfff6f6f6))
     ) {
 
-        CustomNavigationBar(currentScreen = Screen.About)
+        //CustomNavigationBar(currentScreen = Screen.About
 
         Column(
             modifier = Modifier
@@ -514,6 +514,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
                 Spacer(modifier = Modifier.height(10.dp))
             }
         }
+        CustomNavigationBar(currentScreen = Screen.About)
     }
 }
 @Preview(widthDp = 430, heightDp = 932)

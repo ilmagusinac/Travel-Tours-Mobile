@@ -39,7 +39,7 @@ fun SplashScreen(modifier: Modifier = Modifier) {
         modifier = modifier
             .requiredWidth(width = 430.dp)
             .requiredHeight(height = 932.dp)
-            .background(color = Color(0xffd7e9ff))
+            .background(color = Color.White)
     ) {
         Box(
             modifier = Modifier

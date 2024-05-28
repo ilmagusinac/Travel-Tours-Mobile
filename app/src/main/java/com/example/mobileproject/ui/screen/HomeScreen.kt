@@ -236,7 +236,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
     CustomNavigationBar(currentScreen = Screen.Home)
 }
 
-@Preview(widthDp = 430, heightDp = 932)
+@Preview(showBackground=true,widthDp = 430, heightDp = 932)
 @Composable
 fun HomeScreenPreview(){
     MobileProjectTheme {

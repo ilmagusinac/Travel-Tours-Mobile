@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,17 +48,18 @@ fun SignUpPage(modifier: Modifier = Modifier) {
             .requiredHeight(height = 932.dp)
             .background(color = Color.White)
     ) {
-        Icon(
-            painter = painterResource(id = R.drawable.arrow_left),
-            contentDescription = "Arrow - Down",
-            modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(
-                    x = 25.dp,
-                    y = 73.dp
-                )
-                .requiredSize(size = 28.dp)
-                .rotate(degrees = 0f))
+
+
+        IconButton(
+            onClick = {  },
+            modifier = Modifier.offset(x=15.dp, y=50.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.arrow),
+                contentDescription = "Favorite",
+                tint = Color.Black
+            )
+        }
         Text(
             text = "Sign up for free",
             color = Color(0xff1f1f1f),

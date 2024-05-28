@@ -39,7 +39,6 @@ class MainActivity : ComponentActivity() {
                     AboutScreen()
                     ProfileScreen()
                     EditProfileScreen()
-
                     ToursScreen()
                     
 
@@ -62,6 +61,5 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingPreview() {
     MobileProjectTheme {
         Greeting("Android")
-        //AboutScreen()
     }
 }

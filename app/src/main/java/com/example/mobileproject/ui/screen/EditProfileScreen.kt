@@ -71,7 +71,7 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
             .background(color = Color(0xfff6f6f6))
     ) {
 
-        CustomNavigationBar(currentScreen = Screen.Profile)
+        //CustomNavigationBar(currentScreen = Screen.Profile)
 
         Box( //YOUR PROFILE BOX
             modifier = Modifier
@@ -229,7 +229,7 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                 )
             }
         }
-
+        CustomNavigationBar(currentScreen = Screen.Profile)
     }
 }
 

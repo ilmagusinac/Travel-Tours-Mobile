@@ -52,7 +52,7 @@ fun ToursScreen(modifier: Modifier = Modifier) {
             .background(color = Color(0xfff6f6f6))
     ) {
 
-        CustomNavigationBar(currentScreen = Screen.Tours)
+        //CustomNavigationBar(currentScreen = Screen.Tours)
         Box(
             modifier = modifier
                 .requiredWidth(width = 95.dp)
@@ -295,6 +295,7 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                 }
             }
         }
+        CustomNavigationBar(currentScreen = Screen.Tours)
     }
 
 }

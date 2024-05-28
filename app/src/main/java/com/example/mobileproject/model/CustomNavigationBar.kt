@@ -211,7 +211,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen) {
         }
     }
 }
-@Preview()
+@Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview(){
     MobileProjectTheme {
