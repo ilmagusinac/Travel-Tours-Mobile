@@ -2,6 +2,7 @@ package com.example.mobileproject.model
 
 import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.mobileproject.model.daos.UsersDao
 import com.example.mobileproject.model.daos.ToursDao
