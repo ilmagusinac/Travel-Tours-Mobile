@@ -70,175 +70,201 @@ object HomeDestination: NavigationDestination {
 }
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
-    val images = listOf(
-        R.drawable.slider1,
-        R.drawable.slider2,
-        R.drawable.slider3,
-        R.drawable.slider4,
-        R.drawable.slider5
-    )
-
-    var currentPage by remember { mutableStateOf(0) }
-    var dragOffset by remember { mutableStateOf(0f) }
-    val coroutineScope = rememberCoroutineScope()
-
-    // Automatic slider logic
-    LaunchedEffect(currentPage) {
-        coroutineScope.launch {
-            delay(3000) // Delay for 3 seconds
-            currentPage = (currentPage + 1) % images.size
-        }
-    }
-
-    //CustomNavigationBar(currentScreen = Screen.Home)
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp)
-            .padding(top = 50.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start
+    Box(
+        modifier = modifier
+            .requiredWidth(430.dp)
+            .requiredHeight(932.dp)
+            .background(color = Color(0xfff6f6f6))
     ) {
-        Box(
-            modifier = Modifier
-                .requiredWidth(width = 95.dp)
-                .requiredHeight(height = 40.dp)
-                .padding(top = 19.dp)
+        Column(
+            modifier = Modifier.fillMaxSize()
         ) {
-            Text(
-                text = "Home page",
-                color = Color(0xff818181),
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
-                ),
-                modifier = Modifier.fillMaxSize()
-            )
-        }
-
-        Spacer(modifier = Modifier.height(1.dp))
-
-        Text(
-            text = "Welcome to Travel & Tours",
-            color = Color.Black,
-            style = TextStyle(
-                fontSize = 26.sp,
-                shadow = Shadow(
-                    color = Color.Black.copy(alpha = 0.25f),
-                    offset = Offset(0f, 4f),
-                    blurRadius = 4f
-                )
-            ),
-            modifier = Modifier.padding(top = 1.dp)
-        )
-
-        Spacer(modifier = Modifier.height(25.dp))
-
-        Text(
-            text = "Check out some of our trips",
-            color = Color(0xff818181),
-            style = TextStyle(
-                fontSize = 13.sp,
-                fontWeight = FontWeight.Medium
-            ),
-            modifier = Modifier
-                .requiredWidth(width = 183.dp)
-                .requiredHeight(height = 19.dp)
-        )
-
-        Spacer(modifier = Modifier.height(5.dp))
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(248.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .pointerInput(Unit) {
-                    detectHorizontalDragGestures(
-                        onDragStart = { dragOffset = 0f },
-                        onDragEnd = {
-                            val threshold = 100f
-                            if (dragOffset > threshold) {
-                                currentPage = (currentPage - 1).coerceIn(0, images.size - 1)
-                            } else if (dragOffset < -threshold) {
-                                currentPage = (currentPage + 1).coerceIn(0, images.size - 1)
-                            }
-                        }
-                    ) { change, dragAmount ->
-                        dragOffset += dragAmount
-                        change.consume()
-                    }
-                }
-        ) {
-            Image(
-                painter = painterResource(id = images[currentPage]),
-                contentDescription = null,
+            // Title section
+            Box(
                 modifier = Modifier
-                    .fillMaxSize()
-            )
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            text = buildAnnotatedString {
-                withStyle(style = SpanStyle(
-                    color = Color.Black,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold)) { append("Travel&Tours \n") }
-                withStyle(style = SpanStyle(
-                    color = Color.Black,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Light,
-                    fontStyle = FontStyle.Italic)) { append("Where Every Destination \nFeels Like ") }
-                withStyle(style = SpanStyle(
-                    color = Color.Black,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold)) { append("Home!") }
-            },
-            modifier = Modifier
-                .padding(top = 12.dp, bottom = 1.dp)
-                .align(Alignment.CenterHorizontally)
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(start = 16.dp, end = 16.dp, bottom = 5.dp) // Adjust the padding as needed
-                .align(Alignment.CenterHorizontally)
-        ) {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp)
-                    .padding(top = 25.dp, bottom = 18.dp) // Ensure proper padding for scrolling
+                    .requiredWidth(95.dp)
+                    .requiredHeight(40.dp)
+                    .align(alignment = Alignment.Start)
+                    .offset(x = 30.dp, y = 19.dp)
             ) {
-                item {
-                    Text(
-                        text = "At Travel&Tours, we're dedicated to redefining travel experiences. " +
-                                "Our app offers personalised journeys tailored to your interests, from cultural immersion to adventure. " +
-                                "Explore curated attractions and create bespoke itineraries effortlessly. " +
-                                "Let us transform your wanderlust into unforgettable memories. " +
-                                "Discover more with Travel&Tours.",
-                        color = Color.Black,
+                Text(
+                    text = "Home page",
+                    color = Color(0xff818181),
+                    style = TextStyle(
                         fontSize = 16.sp,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 8.dp),
-                        textAlign = TextAlign.Justify
-                    )
+                        fontWeight = FontWeight.Medium
+                    ),
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Box(
+                modifier = Modifier
+                    .requiredWidth(220.dp)
+                    .requiredHeight(35.dp)
+                    .align(alignment = Alignment.Start)
+                    .offset(x = 30.dp, y = 0.dp)
+            ) {
+                Text(
+                    text = "Welcome to Travel & Tours",
+                    color = Color.Black,
+                    style = TextStyle(
+                        fontSize = 26.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        shadow = Shadow(
+                            color = Color.Black.copy(alpha = 0.25f),
+                            offset = Offset(0f, 4f),
+                            blurRadius = 4f
+                        )
+                    ),
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            Spacer(modifier = Modifier.height(25.dp))
+
+            Box(
+                modifier = Modifier
+                    .requiredWidth(220.dp)
+                    .requiredHeight(35.dp)
+                    .align(alignment = Alignment.Start)
+                    .offset(x = 30.dp, y = 0.dp)
+            ) {
+                Text(
+                    text = "Check out some of our trips",
+                    color = Color(0xff818181),
+                    style = TextStyle(
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Medium
+                    ),
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            // Image slider
+            val images = listOf(
+                R.drawable.slider1,
+                R.drawable.slider2,
+                R.drawable.slider3,
+                R.drawable.slider4,
+                R.drawable.slider5
+            )
+
+            var currentPage by remember { mutableStateOf(0) }
+            var dragOffset by remember { mutableStateOf(0f) }
+            val coroutineScope = rememberCoroutineScope()
+
+            // Automatic slider logic
+            LaunchedEffect(currentPage) {
+                coroutineScope.launch {
+                    delay(3000) // Delay for 3 seconds
+                    currentPage = (currentPage + 1) % images.size
                 }
             }
-            //CustomNavigationBar(currentScreen = Screen.Home)
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(248.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .pointerInput(Unit) {
+                        detectHorizontalDragGestures(
+                            onDragStart = { dragOffset = 0f },
+                            onDragEnd = {
+                                val threshold = 100f
+                                if (dragOffset > threshold) {
+                                    currentPage = (currentPage - 1).coerceIn(0, images.size - 1)
+                                } else if (dragOffset < -threshold) {
+                                    currentPage = (currentPage + 1).coerceIn(0, images.size - 1)
+                                }
+                            }
+                        ) { change, dragAmount ->
+                            dragOffset += dragAmount
+                            change.consume()
+                        }
+                    }
+            ) {
+                Image(
+                    painter = painterResource(id = images[currentPage]),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = buildAnnotatedString {
+                    withStyle(style = SpanStyle(
+                        color = Color.Black,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    )) { append("Travel&Tours \n") }
+                    withStyle(style = SpanStyle(
+                        color = Color.Black,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Light,
+                        fontStyle = FontStyle.Italic
+                    )) { append("Where Every Destination \nFeels Like ") }
+                    withStyle(style = SpanStyle(
+                        color = Color.Black,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    )) { append("Home!") }
+                },
+                modifier = Modifier
+                    .padding(top = 12.dp, bottom = 1.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+
+            Spacer(modifier = Modifier.height(25.dp))
+
+            // Description text in a LazyColumn
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(start = 16.dp, end = 16.dp)
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp)
+                        .padding(top = 25.dp, bottom = 38.dp)
+                ) {
+                    item {
+                        Text(
+                            text = "At Travel&Tours, we're dedicated to redefining travel experiences. " +
+                                    "Our app offers personalised journeys tailored to your interests, from cultural immersion to adventure. " +
+                                    "Explore curated attractions and create bespoke itineraries effortlessly. " +
+                                    "Let us transform your wanderlust into unforgettable memories. " +
+                                    "Discover more with Travel&Tours.",
+                            color = Color.Black,
+                            fontSize = 16.sp,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp),
+                            textAlign = TextAlign.Justify
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
         }
-        //CustomNavigationBar(currentScreen = Screen.Home)
+
+        // Navigation bar
+        CustomNavigationBar(currentScreen = Screen.Home)
     }
-    CustomNavigationBar(currentScreen = Screen.Home)
 }
 
-@Preview(showBackground=true,widthDp = 430, heightDp = 932)
+@Preview(showBackground = true, widthDp = 430, heightDp = 932)
 @Composable
-fun HomeScreenPreview(){
+fun HomeScreenPreview() {
     MobileProjectTheme {
         HomeScreen()
     }

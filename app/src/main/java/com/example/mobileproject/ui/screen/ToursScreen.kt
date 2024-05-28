@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
@@ -37,80 +38,89 @@ import com.example.mobileproject.model.Screen
 import com.example.mobileproject.model.TourInfo
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 
-
 object ToursDestination: NavigationDestination {
     override val route = "tours"
     override val title = "Tours"
 }
+
 @Composable
 fun ToursScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
-            .requiredWidth(width = 430.dp)
-            .requiredHeight(height = 932.dp)
+            .requiredWidth(430.dp)
+            .requiredHeight(932.dp)
             .background(color = Color(0xfff6f6f6))
+
     ) {
-
-        //CustomNavigationBar(currentScreen = Screen.Tours)
-        Box(
-            modifier = modifier
-                .requiredWidth(width = 95.dp)
-                .requiredHeight(height = 24.dp)
-                .align(alignment = Alignment.TopStart)
-                .offset(x = 30.dp, y = 90.dp)
+        Column(
+            modifier = Modifier.fillMaxSize()
         ) {
-            Text(
-                text = "Tours",
-                color = Color(0xff818181),
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Medium
-                ),
-                modifier = Modifier.fillMaxSize()
-            )
-        }
+            // Title section
+            Box(
+                modifier = Modifier
+                    .requiredWidth(95.dp)
+                    .requiredHeight(50.dp)
+                    .align(alignment = Alignment.Start)
+                    .offset(x = 30.dp, y = 80.dp)
+            ) {
+                Text(
+                    text = "Tours",
+                    color = Color(0xff818181),
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium
+                    ),
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
 
-        // Title
-        Box(
-            modifier = modifier
-                .requiredWidth(width = 220.dp)
-                .requiredHeight(height = 35.dp)
-                .align(alignment = Alignment.TopStart)
-                .offset(x = 30.dp, y = 120.dp)
-        ) {
-            Text(
-                text = "Find your next trip",
-                color = Color.Black,
-                style = TextStyle(
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.SemiBold
-                ),
-                modifier = Modifier.fillMaxSize()
-            )
-        }
+            Box(
+                modifier = Modifier
+                    .requiredWidth(220.dp)
+                    .requiredHeight(35.dp)
+                    .align(alignment = Alignment.Start)
+                    .offset(x = 30.dp, y = 80.dp)
+            ) {
+                Text(
+                    text = "Find your next trip",
+                    color = Color.Black,
+                    style = TextStyle(
+                        fontSize = 26.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
 
-        //Popular tours title
-        Box(
-            modifier = modifier
-                .requiredWidth(width = 220.dp)
-                .requiredHeight(height = 35.dp)
-                .align(alignment = Alignment.TopStart)
-                .offset(x = 30.dp, y = 180.dp)
-        ) {
-            Text(
-                text = "Popular tours",
-                color = Color.Black,
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.SemiBold
-                ),
-                modifier = Modifier.fillMaxSize()
-            )
-        }
+            Box(
+                modifier = Modifier
+                    .requiredWidth(220.dp)
+                    .requiredHeight(35.dp)
+                    .align(alignment = Alignment.Start)
+                    .offset(x = 30.dp, y = 120.dp)
+            ) {
+                Text(
+                    text = "Popular tours",
+                    color = Color.Black,
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
 
-        AttractionGrid()
+            Spacer(modifier = Modifier.height(10.dp)) // Add some space before the grid
+
+            // Attraction grid
+            AttractionGrid()
         }
+        // Navigation bar
+        CustomNavigationBar(currentScreen = Screen.Tours)
     }
+    // Navigation bar
+    //CustomNavigationBar(currentScreen = Screen.Tours)
+}
 
 @Composable
 fun TourCard(
@@ -126,17 +136,14 @@ fun TourCard(
             .background(color = Color.Gray)
             .clickable(onClick = onClick)
     ) {
-        // Photo
         Image(
             painter = painterResource(id = imageRes),
             contentDescription = "Photo",
             modifier = Modifier
                 .fillMaxSize()
                 .clip(shape = RoundedCornerShape(16.dp))
-                .clickable { }
         )
 
-        // Title and description
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -160,8 +167,7 @@ fun TourCard(
 }
 
 @Composable
-fun AttractionGrid(/*navigateToTourView: (TourInfo) -> Unit*/) {
-    // Sample tour data
+fun AttractionGrid() {
     val tours = listOf(
         TourInfo(
             imageRes = R.drawable.tour1,
@@ -204,7 +210,7 @@ fun AttractionGrid(/*navigateToTourView: (TourInfo) -> Unit*/) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 260.dp),
+            .padding(top = 180.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         for (i in tours.indices step 2) {
@@ -216,7 +222,7 @@ fun AttractionGrid(/*navigateToTourView: (TourInfo) -> Unit*/) {
                     imageRes = tours[i].imageRes,
                     title = tours[i].title,
                     date = tours[i].description,
-                    onClick = { /*navigateToTourView(tours[i])*/ }
+                    onClick = { /* navigateToTourView(tours[i]) */ }
                 )
                 Spacer(modifier = Modifier.width(30.dp))
                 if (i + 1 < tours.size) {
@@ -224,14 +230,14 @@ fun AttractionGrid(/*navigateToTourView: (TourInfo) -> Unit*/) {
                         imageRes = tours[i + 1].imageRes,
                         title = tours[i + 1].title,
                         date = tours[i + 1].description,
-                        onClick = { /*navigateToTourView(tours[i + 1])*/ }
+                        onClick = { /* navigateToTourView(tours[i + 1]) */ }
                     )
                 }
             }
         }
-        CustomNavigationBar(currentScreen = Screen.Tours)
     }
 }
+
 @Preview(widthDp = 430, heightDp = 932)
 @Composable
 fun ToursScreenPreview() {
@@ -240,13 +246,10 @@ fun ToursScreenPreview() {
     }
 }
 
-@Preview()
+@Preview
 @Composable
 fun TourCardPreview() {
     MobileProjectTheme {
-
+        TourCard(R.drawable.tour1, "Western Strait", "22.2.2022", onClick = { /* */ })
     }
-    TourCard(R.drawable.tour1, "Western Strait", "22.2.2022", onClick={/**/})
 }
-
-

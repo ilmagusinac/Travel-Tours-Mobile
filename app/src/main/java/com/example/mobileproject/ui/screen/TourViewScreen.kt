@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -43,18 +41,17 @@ import com.example.mobileproject.model.TourInfo
 import com.example.mobileproject.model.sampleTour
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 
-object TourViewDestination: NavigationDestination {
+object TourViewDestination : NavigationDestination {
     override val route = "tourview"
     override val title = "Tourview"
 }
 
 @Composable
 fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
-    CustomNavigationBar(currentScreen = Screen.Tours)
     Box(
         modifier = modifier
-            .requiredWidth(width = 430.dp)
-            .requiredHeight(height = 932.dp)
+            .requiredWidth(430.dp)
+            .requiredHeight(932.dp)
             .background(color = Color(0xfff6f6f6))
     ) {
         Image(
@@ -82,8 +79,8 @@ fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
         )
 
         IconButton(
-            onClick = {  },
-            modifier = Modifier.offset(x=15.dp, y=50.dp)
+            onClick = { },
+            modifier = Modifier.offset(x = 15.dp, y = 50.dp)
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.arrow),
@@ -132,10 +129,8 @@ fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
 
                 tour.attractions.forEach { attraction ->
                     Row(
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier
-                            .padding(bottom = 8.dp)
-                            .offset(y = 10.dp)
+                        horizontalArrangement = Arrangement.Start,
+                        modifier = Modifier.padding(bottom = 8.dp)
                     ) {
                         Icon(
                             painter = painterResource(id = attraction.iconRes),
@@ -143,19 +138,14 @@ fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
                             tint = Color.Red,
                             modifier = Modifier
                                 .size(30.dp)
-                                .offset(y = 8.dp)
+                                .padding(end = 8.dp)
                         )
-                        Spacer(modifier = Modifier.width(15.dp))
-                        Column(
-                            modifier = Modifier.padding(start = 8.dp)
-                        ) {
+
+                        Column {
                             Text(
                                 text = attraction.name,
                                 fontWeight = FontWeight.Bold,
-                                style = TextStyle(
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
+                                style = TextStyle(fontSize = 20.sp)
                             )
                             Text(
                                 text = attraction.description,
@@ -167,22 +157,17 @@ fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
                 }
 
                 Button(
-                    onClick = { },
+                    onClick = { /* TODO: Implement booking logic */ },
                     shape = RoundedCornerShape(36.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
                     modifier = Modifier
-                        //.align(alignment = Alignment.TopStart)
-                        .offset(
-                            x = 15.dp,
-                            y = 390.dp
-                        )
-                        .requiredWidth(width = 397.dp)
-                        .requiredHeight(height = 70.dp)
-                        .wrapContentHeight(align = Alignment.CenterVertically)
+                        .padding(top = 32.dp)
+                        .fillMaxWidth()
+                        .height(70.dp)
                 ) {
                     Text(
                         text = "Book a trip",
-                        color = Color(0xffffffff),
+                        color = Color.White,
                         style = TextStyle(
                             fontSize = 14.sp,
                             fontWeight = FontWeight.Bold
@@ -191,17 +176,15 @@ fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
                 }
             }
         }
+
+        CustomNavigationBar(currentScreen = Screen.Tours)
     }
 }
-
-
 
 @Preview(widthDp = 430, heightDp = 932)
 @Composable
 fun ToursViewScreenPreview() {
     MobileProjectTheme {
-        ToursViewScreen(tour=sampleTour,Modifier)
+        ToursViewScreen(tour = sampleTour, Modifier)
     }
 }
-
-
