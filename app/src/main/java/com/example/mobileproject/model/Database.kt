@@ -29,7 +29,7 @@ abstract class UserDatabase: RoomDatabase() {
         fun getDatabase(context: Context): UserDatabase {
             // if the Instance is not null, return it, otherwise create a new database instance.
             return Instance ?: synchronized(this) {
-                Room.databaseBuilder(context, UserDatabase::class.java, "StudentAPPDatabase")
+                Room.databaseBuilder(context, UserDatabase::class.java, "UserAPPDatabase")
                     .build().also { Instance = it }
             }
         }
