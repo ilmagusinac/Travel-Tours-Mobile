@@ -6,5 +6,6 @@ data class Destination(
     val name: String,
     val destination: String,
     val date: String,
+    val description: String,
     @DrawableRes var image: Int
 )

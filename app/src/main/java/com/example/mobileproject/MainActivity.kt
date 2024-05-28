@@ -34,7 +34,6 @@ class MainActivity : ComponentActivity() {
 
                     //LoginScreen()
                     ProfileScreen()
-
                     HomeScreen()
                     AboutScreen()
                     ProfileScreen()

@@ -7,13 +7,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -23,7 +21,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -42,15 +39,17 @@ import com.example.mobileproject.R
 import com.example.mobileproject.model.CustomNavigationBar
 import com.example.mobileproject.model.Screen
 import com.example.mobileproject.ui.theme.MobileProjectTheme
-
+import com.example.mobileproject.model.TourInfo
+import com.example.mobileproject.model.sampleTour
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 
 object TourViewDestination: NavigationDestination {
     override val route = "tourview"
     override val title = "Tourview"
 }
+
 @Composable
-fun ToursViewScreen(modifier: Modifier = Modifier) {
+fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
     CustomNavigationBar(currentScreen = Screen.Tours)
     Box(
         modifier = modifier
@@ -58,11 +57,8 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
             .requiredHeight(height = 932.dp)
             .background(color = Color(0xfff6f6f6))
     ) {
-        //CustomNavigationBar()
-
-        // Image placed as a background
         Image(
-            painter = painterResource(id = R.drawable.tourpage),
+            painter = painterResource(id = tour.imageRes),
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
@@ -73,7 +69,7 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
         )
 
         Text(
-            text = "Nordic Cottage",
+            text = tour.title,
             style = TextStyle(
                 color = Color.White,
                 fontSize = 42.sp,
@@ -82,10 +78,9 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .padding(bottom = 16.dp)
-                .offset(x = 80.dp, y = 270.dp)// Adjust padding as needed
+                .offset(x = 80.dp, y = 270.dp)
         )
 
-        // Icon Button Arrow Back
         IconButton(
             onClick = {  },
             modifier = Modifier.offset(x=15.dp, y=50.dp)
@@ -97,11 +92,10 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        // Box with rounded corners
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(500.dp) // Adjust the height as per your requirement
+                .height(500.dp)
                 .align(Alignment.Center)
                 .offset(y = 150.dp)
                 .clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
@@ -110,9 +104,8 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
             Column(
                 modifier = Modifier.padding(16.dp)
             ) {
-                // Title "About Nordic Cottage"
                 Text(
-                    text = "About Nordic Cottage",
+                    text = "About ${tour.title}",
                     style = TextStyle(
                         fontWeight = FontWeight.Bold,
                         fontSize = 22.sp
@@ -120,16 +113,14 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
 
-                // Short description
                 Text(
-                    text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                    text = tour.description,
                     style = TextStyle(
                         fontSize = 18.sp
                     ),
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
-                // Title "Attractions"
                 Text(
                     text = "Attractions",
                     style = TextStyle(
@@ -139,326 +130,69 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
 
-                // Attraction 1
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .padding(bottom = 8.dp)
-                        .offset(y = 10.dp)
-                ) {
-                    // Icon
-                    Icon(
-                        painter = painterResource(id = R.drawable.globe),
-                        contentDescription = "Attraction 1",
-                        tint = Color.Red,
+                tour.attractions.forEach { attraction ->
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
                         modifier = Modifier
-                            .size(30.dp)
-                            .offset(y = 8.dp)
-                    )
-                    Spacer(modifier = Modifier.width(15.dp))
-                    // Name and short description
-                    Column(
-                        modifier = Modifier.padding(start = 8.dp)
+                            .padding(bottom = 8.dp)
+                            .offset(y = 10.dp)
                     ) {
-                        Text(
-                            text = "Attraction 1",
-                            fontWeight = FontWeight.Bold,
-                            style = TextStyle(
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold
+                        Icon(
+                            painter = painterResource(id = attraction.iconRes),
+                            contentDescription = attraction.name,
+                            tint = Color.Red,
+                            modifier = Modifier
+                                .size(30.dp)
+                                .offset(y = 8.dp)
+                        )
+                        Spacer(modifier = Modifier.width(15.dp))
+                        Column(
+                            modifier = Modifier.padding(start = 8.dp)
+                        ) {
+                            Text(
+                                text = attraction.name,
+                                fontWeight = FontWeight.Bold,
+                                style = TextStyle(
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
                             )
-
-                        )
-                        Text(
-                            text = "Description of Attraction 1",
-                            fontSize = 18.sp,
-                            color = Color.Gray
-                        )
+                            Text(
+                                text = attraction.description,
+                                fontSize = 18.sp,
+                                color = Color.Gray
+                            )
+                        }
                     }
                 }
 
-                // Attraction 2
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
+                Button(
+                    onClick = { },
+                    shape = RoundedCornerShape(36.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
                     modifier = Modifier
-                        .padding(bottom = 8.dp)
-                        .offset(y = 12.dp)
+                        //.align(alignment = Alignment.TopStart)
+                        .offset(
+                            x = 15.dp,
+                            y = 390.dp
+                        )
+                        .requiredWidth(width = 397.dp)
+                        .requiredHeight(height = 70.dp)
+                        .wrapContentHeight(align = Alignment.CenterVertically)
                 ) {
-                    // Icon
-                    Icon(
-                        painter = painterResource(id = R.drawable.globe),
-                        contentDescription = "Attraction 1",
-                        tint = Color.Red,
-                        modifier = Modifier
-                            .size(30.dp)
-                            .offset(y = 8.dp)
+                    Text(
+                        text = "Book a trip",
+                        color = Color(0xffffffff),
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold
+                        )
                     )
-                    Spacer(modifier = Modifier.width(15.dp))
-                    // Name and short description
-                    Column(
-                        modifier = Modifier.padding(start = 8.dp)
-                    ) {
-                        Text(
-                            text = "Attraction 2",
-                            fontWeight = FontWeight.Bold,
-                            style = TextStyle(
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-
-                        )
-                        Text(
-                            text = "Description of Attraction 2",
-                            fontSize = 18.sp,
-                            color = Color.Gray
-                        )
-                    }
                 }
-                // Attraction 2
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .padding(bottom = 8.dp)
-                        .offset(y = 12.dp)
-                ) {
-                    // Icon
-                    Icon(
-                        painter = painterResource(id = R.drawable.globe),
-                        contentDescription = "Attraction 1",
-                        tint = Color.Red,
-                        modifier = Modifier
-                            .size(30.dp)
-                            .offset(y = 8.dp)
-                    )
-                    Spacer(modifier = Modifier.width(15.dp))
-                    // Name and short description
-                    Column(
-                        modifier = Modifier.padding(start = 8.dp)
-                    ) {
-                        Text(
-                            text = "Attraction 3",
-                            fontWeight = FontWeight.Bold,
-                            style = TextStyle(
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-
-                        )
-                        Text(
-                            text = "Description of Attraction 3",
-                            fontSize = 18.sp,
-                            color = Color.Gray
-                        )
-                    }
-                }
-            }
-            //Book a trip BUTTON
-            Button(
-                onClick = { },
-                shape = RoundedCornerShape(36.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
-                modifier = Modifier
-                    .align(alignment = Alignment.TopStart)
-                    .offset(
-                        x = 15.dp,
-                        y = 390.dp
-                    )
-                    .requiredWidth(width = 397.dp)
-                    .requiredHeight(height = 70.dp)
-                    .wrapContentHeight(align = Alignment.CenterVertically)
-            ){
-                Text(
-                    text = "Book a trip",
-                    color = Color(0xffffffff),
-                    style = TextStyle(
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                )
             }
         }
-
-
-/*
-        NavigationBar(
-            modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(
-                    x = 0.dp,
-                    y = 825.dp
-                )
-        ) {
-            Box(
-                modifier = Modifier
-                    .requiredWidth(width = 430.dp)
-                    .requiredHeight(height = 107.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .requiredWidth(width = 430.dp)
-                        .requiredHeight(height = 107.dp)
-                        .clip(shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                        .background(color = Color.White)
-                )
-
-
-                IconButton( //HOME
-                    onClick = { },
-
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(x = 15.dp, y = 8.dp)
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier.requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.homeoutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Text(
-                            text = "Home",
-                            color = Color(0xffbcbcbc),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-
-
-
-                IconButton( //PROFILE
-                    onClick = { },
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(x = 325.dp, y = 8.dp)
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier.requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.usercircleoutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Text(
-                            text = "Profile",
-                            color = Color(0xffbcbcbc),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-
-
-
-                IconButton( //TOURS
-                    onClick = { },
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(
-                            x = 118.dp,
-                            y = 8.dp
-                        )
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.calendaroutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xff0373f3), // Set the color of the Icon
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Text(
-                            text = "Tours",
-                            color = Color(0xff0373f3),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-
-
-
-                IconButton( //ABOUT
-                    onClick = { },
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(
-                            x = 221.dp,
-                            y = 8.dp
-                        )
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.mailopenoutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Text(
-                            text = "About",
-                            color = Color(0xffbcbcbc),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-            }
-        }*/
-      //  CustomNavigationBar()
     }
-    //CustomNavigationBar()
 }
-
 
 
 
@@ -466,7 +200,7 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
 @Composable
 fun ToursViewScreenPreview() {
     MobileProjectTheme {
-        ToursViewScreen(Modifier)
+        ToursViewScreen(tour=sampleTour,Modifier)
     }
 }
 
