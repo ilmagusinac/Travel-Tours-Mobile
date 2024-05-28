@@ -27,6 +27,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobileproject.R
 
+import com.example.mobileproject.ui.screen.navigation.NavigationDestination
+
+object SplashDestination: NavigationDestination {
+    override val route = "splash"
+    override val title = "Splash"
+}
 @Composable
 fun SplashScreen(modifier: Modifier = Modifier) {
     Box(

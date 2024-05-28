@@ -5,13 +5,16 @@
       <entry key="AboutScreenPreview">
         <State />
       </entry>
+      <entry key="DestinationHistoryCardPreview">
+        <State />
+      </entry>
       <entry key="EditProfileScreenPreview">
         <State />
       </entry>
-      <entry key="HomeScreenPreview">
+      <entry key="ProfileScreenPreview">
         <State />
       </entry>
-      <entry key="ProfileScreenPreview">
+      <entry key="ToursViewScreenPreview">
         <State />
       </entry>
       <entry key="app">

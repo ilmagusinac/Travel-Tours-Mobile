@@ -35,7 +35,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobileproject.R
 import com.example.mobileproject.ui.theme.MobileProjectTheme
+import com.example.mobileproject.model.CustomNavigationBar
+import com.example.mobileproject.model.Screen
+import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 
+object ToursDestination: NavigationDestination {
+    override val route = "tours"
+    override val title = "Tours"
+}
 @Composable
 fun ToursScreen(modifier: Modifier = Modifier) {
     Box(
@@ -45,181 +52,7 @@ fun ToursScreen(modifier: Modifier = Modifier) {
             .background(color = Color(0xfff6f6f6))
     ) {
 
-        NavigationBar(
-            modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(
-                    x = 0.dp,
-                    y = 825.dp
-                )
-        ) {
-            Box(
-                modifier = Modifier
-                    .requiredWidth(width = 430.dp)
-                    .requiredHeight(height = 107.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .requiredWidth(width = 430.dp)
-                        .requiredHeight(height = 107.dp)
-                        .clip(shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                        .background(color = Color.White)
-                )
-
-
-                IconButton( //HOME
-                    onClick = { },
-
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(x = 15.dp, y = 8.dp)
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier.requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.homeoutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Text(
-                            text = "Home",
-                            color = Color(0xffbcbcbc),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-
-
-
-                IconButton( //PROFILE
-                    onClick = { },
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(x = 325.dp, y = 8.dp)
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier.requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.usercircleoutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Text(
-                            text = "Profile",
-                            color = Color(0xffbcbcbc),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-
-
-
-                IconButton( //TOURS
-                    onClick = { },
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(
-                            x = 118.dp,
-                            y = 8.dp
-                        )
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.calendaroutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xff0373f3), // Set the color of the Icon
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Text(
-                            text = "Tours",
-                            color = Color(0xff0373f3),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-
-
-
-                IconButton( //ABOUT
-                    onClick = { },
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(
-                            x = 221.dp,
-                            y = 8.dp
-                        )
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.mailopenoutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Text(
-                            text = "About",
-                            color = Color(0xffbcbcbc),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-            }
-        }
-
+        CustomNavigationBar(currentScreen = Screen.Tours)
         Box(
             modifier = modifier
                 .requiredWidth(width = 95.dp)
@@ -282,7 +115,7 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .align(Alignment.TopCenter)
                 .padding(top = 260.dp)
-                .offset(x=50.dp)
+                .offset(x = 50.dp)
         ) {
             // First row of cards
             Row(
@@ -300,12 +133,17 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                     Image(
                         painter = painterResource(id = R.drawable.tour1),
                         contentDescription = "Photo",
-                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp)).clickable {  }
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(shape = RoundedCornerShape(16.dp))
+                            .clickable { }
                     )
 
                     // Title and description 1
                     Column(
-                        modifier = Modifier.fillMaxSize().padding(18.dp)
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(18.dp)
                     ) {
                         Text(
                             text = "Western Strait",
@@ -335,12 +173,17 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                     Image(
                         painter = painterResource(id = R.drawable.tour4),
                         contentDescription = "Photo",
-                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp)).clickable {  }
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(shape = RoundedCornerShape(16.dp))
+                            .clickable { }
                     )
 
                     // Title and description
                     Column(
-                        modifier = Modifier.fillMaxSize().padding(18.dp)
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(18.dp)
                     ) {
                         Text(
                             text = "Lake cottage",
@@ -364,7 +207,7 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .align(Alignment.TopCenter)
                 .padding(top = 510.dp)
-                .offset(x=50.dp)
+                .offset(x = 50.dp)
         ) {
             // First row of cards
             Row(
@@ -382,12 +225,17 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                     Image(
                         painter = painterResource(id = R.drawable.tour3),
                         contentDescription = "Photo",
-                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp)).clickable {  }
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(shape = RoundedCornerShape(16.dp))
+                            .clickable { }
                     )
 
                     // Title and description
                     Column(
-                        modifier = Modifier.fillMaxSize().padding(18.dp)
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(18.dp)
                     ) {
                         Text(
                             text = "Scottish castle",
@@ -418,12 +266,17 @@ fun ToursScreen(modifier: Modifier = Modifier) {
                     Image(
                         painter = painterResource(id = R.drawable.tour2),
                         contentDescription = "Photo",
-                        modifier = Modifier.fillMaxSize().clip(shape = RoundedCornerShape(16.dp)).clickable {  }
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clip(shape = RoundedCornerShape(16.dp))
+                            .clickable { }
                     )
 
                     // Title and description
                     Column(
-                        modifier = Modifier.fillMaxSize().padding(18.dp)
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(18.dp)
                     ) {
                         Text(
                             text = "Forest Heaven",

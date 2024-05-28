@@ -29,7 +29,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobileproject.R
+import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 
+object SignUpDestination: NavigationDestination {
+    override val route = "signup"
+    override val title = "Signup"
+}
 @Composable
 fun SignUpPage(modifier: Modifier = Modifier) {
     val username = remember { mutableStateOf("") }

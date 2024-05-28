@@ -30,7 +30,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobileproject.R
+import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 
+object SignInDestination: NavigationDestination {
+    override val route = "signin"
+    override val title = "Signin"
+}
 @Composable
 fun SignInPage(modifier: Modifier = Modifier) {
     val password = remember { mutableStateOf("") }

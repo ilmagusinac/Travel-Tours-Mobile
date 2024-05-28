@@ -39,16 +39,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobileproject.R
+import com.example.mobileproject.model.CustomNavigationBar
+import com.example.mobileproject.model.Screen
 import com.example.mobileproject.ui.theme.MobileProjectTheme
 
+import com.example.mobileproject.ui.screen.navigation.NavigationDestination
+
+object TourViewDestination: NavigationDestination {
+    override val route = "tourview"
+    override val title = "Tourview"
+}
 @Composable
 fun ToursViewScreen(modifier: Modifier = Modifier) {
+    CustomNavigationBar(currentScreen = Screen.Tours)
     Box(
         modifier = modifier
             .requiredWidth(width = 430.dp)
             .requiredHeight(height = 932.dp)
             .background(color = Color(0xfff6f6f6))
     ) {
+        //CustomNavigationBar()
 
         // Image placed as a background
         Image(
@@ -72,7 +82,7 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .padding(bottom = 16.dp)
-                .offset(x=80.dp, y=270.dp)// Adjust padding as needed
+                .offset(x = 80.dp, y = 270.dp)// Adjust padding as needed
         )
 
         // Icon Button Arrow Back
@@ -132,14 +142,18 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
                 // Attraction 1
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.padding(bottom = 8.dp).offset(y=10.dp)
+                    modifier = Modifier
+                        .padding(bottom = 8.dp)
+                        .offset(y = 10.dp)
                 ) {
                     // Icon
                     Icon(
                         painter = painterResource(id = R.drawable.globe),
                         contentDescription = "Attraction 1",
                         tint = Color.Red,
-                        modifier = Modifier.size(30.dp).offset(y=8.dp)
+                        modifier = Modifier
+                            .size(30.dp)
+                            .offset(y = 8.dp)
                     )
                     Spacer(modifier = Modifier.width(15.dp))
                     // Name and short description
@@ -166,14 +180,18 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
                 // Attraction 2
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.padding(bottom = 8.dp).offset(y=12.dp)
+                    modifier = Modifier
+                        .padding(bottom = 8.dp)
+                        .offset(y = 12.dp)
                 ) {
                     // Icon
                     Icon(
                         painter = painterResource(id = R.drawable.globe),
                         contentDescription = "Attraction 1",
                         tint = Color.Red,
-                        modifier = Modifier.size(30.dp).offset(y=8.dp)
+                        modifier = Modifier
+                            .size(30.dp)
+                            .offset(y = 8.dp)
                     )
                     Spacer(modifier = Modifier.width(15.dp))
                     // Name and short description
@@ -199,14 +217,18 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
                 // Attraction 2
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.padding(bottom = 8.dp).offset(y=12.dp)
+                    modifier = Modifier
+                        .padding(bottom = 8.dp)
+                        .offset(y = 12.dp)
                 ) {
                     // Icon
                     Icon(
                         painter = painterResource(id = R.drawable.globe),
                         contentDescription = "Attraction 1",
                         tint = Color.Red,
-                        modifier = Modifier.size(30.dp).offset(y=8.dp)
+                        modifier = Modifier
+                            .size(30.dp)
+                            .offset(y = 8.dp)
                     )
                     Spacer(modifier = Modifier.width(15.dp))
                     // Name and short description
@@ -237,8 +259,10 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
                 modifier = Modifier
                     .align(alignment = Alignment.TopStart)
-                    .offset(x = 15.dp,
-                        y = 390.dp)
+                    .offset(
+                        x = 15.dp,
+                        y = 390.dp
+                    )
                     .requiredWidth(width = 397.dp)
                     .requiredHeight(height = 70.dp)
                     .wrapContentHeight(align = Alignment.CenterVertically)
@@ -255,6 +279,7 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
         }
 
 
+/*
         NavigationBar(
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
@@ -428,9 +453,10 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
                     }
                 }
             }
-        }
+        }*/
+      //  CustomNavigationBar()
     }
-
+    //CustomNavigationBar()
 }
 
 

@@ -47,7 +47,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobileproject.R
 import com.example.mobileproject.ui.theme.MobileProjectTheme
+import com.example.mobileproject.model.CustomNavigationBar
+import com.example.mobileproject.model.Screen
 
+import com.example.mobileproject.ui.screen.navigation.NavigationDestination
+
+object EditProfileDestination: NavigationDestination {
+    override val route = "edit"
+    override val title = "Edit"
+}
 @Composable
 fun EditProfileScreen(modifier: Modifier = Modifier) {
     var text by remember { mutableStateOf("")}
@@ -58,184 +66,20 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
         modifier = modifier
             //.requiredWidth(width = 430.dp)
             .fillMaxWidth()
-            .requiredHeight(height = 932.dp)
+            //.requiredHeight(height = 932.dp)
 
             .background(color = Color(0xfff6f6f6))
     ) {
-        NavigationBar(
-            modifier = Modifier
-                .align(alignment = Alignment.TopStart)
-                .offset(x = 0.dp,
-                    y = 825.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    //.requiredWidth(width = 430.dp)
-                    .fillMaxWidth()
-                    .requiredHeight(height = 107.dp)
-                //.fillMaxSize()
-            ) {
-                Box(
-                    modifier = Modifier
-                        //.requiredWidth(width = 430.dp)
-                        .fillMaxWidth()
-                        .requiredHeight(height = 107.dp)
-                        .clip(shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                        .background(color = Color.White)
-                )
 
-                IconButton( //HOME BUTTON
-                    onClick = { },
-
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(x = 10.dp, y = 8.dp)
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier.requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.homeoutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Text(
-                            text = "Home",
-                            color = Color(0xffbcbcbc),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-
-                IconButton( //TOURS BUTTON
-                    onClick = { },
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(x = 110.dp,
-                            y = 8.dp)
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.calendaroutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                //.border(border = BorderStroke(1.5.dp, Color(0xffbcbcbc)))
-                            )
-                        }
-                        Text(
-                            text = "Tours",
-                            color = Color(0xffbcbcbc),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-
-                IconButton( //ABOUT BUTTON
-                    onClick = { },
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(x = 220.dp,
-                            y = 8.dp)
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.mailopenoutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xffbcbcbc), // Set the color of the Icon
-                                modifier = Modifier
-                                    .fillMaxSize()
-                                //.border(border = BorderStroke(1.5.dp, Color(0xffbcbcbc)))
-                            )
-                        }
-                        Text(
-                            text = "About",
-                            color = Color(0xffbcbcbc),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-
-                IconButton( //PROFILE BUTTON
-                    onClick = { },
-                    modifier = Modifier
-                        .size(90.dp)
-                        .align(alignment = Alignment.TopStart)
-                        .offset(x = 320.dp, y = 8.dp)
-                ) {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Box(
-                            modifier = Modifier.requiredSize(size = 30.dp)
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.usercircleoutline),
-                                contentDescription = "Vector",
-                                tint = Color(0xff0373f3), // Set the color of the Icon
-                                modifier = Modifier.fillMaxSize()
-                            )
-                        }
-                        Text(
-                            text = "Profile",
-                            color = Color(0xff0373f3),
-                            style = TextStyle(
-                                fontSize = 14.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                            modifier = Modifier.padding(top = 4.dp) // Add padding to separate icon and text
-                        )
-                    }
-                }
-            }
-        }
+        CustomNavigationBar(currentScreen = Screen.Profile)
 
         Box( //YOUR PROFILE BOX
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
-                .offset(x = 30.dp,
-                    y = 90.dp)
+                .offset(
+                    x = 30.dp,
+                    y = 90.dp
+                )
         ){
             Box(
                 modifier = modifier
@@ -259,8 +103,10 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
         Box( //PROFILE PICTURE
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
-                .offset(x = 272.dp,
-                    y = 125.dp)
+                .offset(
+                    x = 272.dp,
+                    y = 125.dp
+                )
                 .requiredSize(size = 100.dp)
                 .clip(shape = CircleShape)
                 .background(color = Color(0xff0373f3))
@@ -270,8 +116,10 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
             contentDescription = "UserOutline",
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
-                .offset(x = 295.dp,
-                    y = 148.dp)
+                .offset(
+                    x = 295.dp,
+                    y = 148.dp
+                )
                 .requiredSize(size = 54.dp)
         )
 
@@ -291,14 +139,25 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                     .requiredHeight(height = 51.dp)
                     .clip(shape = RoundedCornerShape(36.dp))
                     .background(color = Color.White)
-                    .border(border = BorderStroke(1.dp, Color(0xffe9e9e9)), shape = RoundedCornerShape(36.dp))
+                    .border(
+                        border = BorderStroke(1.dp, Color(0xffe9e9e9)),
+                        shape = RoundedCornerShape(36.dp)
+                    )
             ) {
                 TextField(
                     value = text,
                     onValueChange = { text = it },
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = Color.Transparent,
+                        unfocusedContainerColor = Color.Transparent,
+                        disabledContainerColor = Color.Transparent,
+                        errorContainerColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
+                    ),
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(start = 55.dp)
+                        .background(Color.Transparent)
                 )
 
                 Icon(
@@ -324,14 +183,25 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                     .requiredHeight(height = 51.dp)
                     .clip(shape = RoundedCornerShape(36.dp))
                     .background(color = Color.White)
-                    .border(border = BorderStroke(1.dp, Color(0xffe9e9e9)), shape = RoundedCornerShape(36.dp))
+                    .border(
+                        border = BorderStroke(1.dp, Color(0xffe9e9e9)),
+                        shape = RoundedCornerShape(36.dp)
+                    )
             ) {
                 TextField(
                     value = text2,
                     onValueChange = { text2 = it },
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = Color.Transparent,
+                        unfocusedContainerColor = Color.Transparent,
+                        disabledContainerColor = Color.Transparent,
+                        errorContainerColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent
+                    ),
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(start = 55.dp)
+                        .background(Color.Transparent)
                 )
 
                 Icon(
@@ -348,7 +218,9 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                 shape = RoundedCornerShape(36.dp),
                 //colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff0373f3)),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
-                modifier = Modifier.padding(top = 61.dp).align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .padding(top = 61.dp)
+                    .align(Alignment.CenterHorizontally)
             ) {
                 Text(
                     text = "Save Changes",
