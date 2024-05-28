@@ -19,6 +19,7 @@ import com.example.mobileproject.ui.screen.HomeScreen
 import com.example.mobileproject.ui.screen.AboutScreen
 
 import com.example.mobileproject.ui.screen.EditProfileScreen
+import com.example.mobileproject.ui.screen.SignUpPage
 
 
 class MainActivity : ComponentActivity() {
@@ -33,12 +34,13 @@ class MainActivity : ComponentActivity() {
                 ) {
 
                     //LoginScreen()
-                    ProfileScreen()
-                    HomeScreen()
-                    AboutScreen()
-                    ProfileScreen()
-                    EditProfileScreen()
-                    ToursScreen()
+                    //ProfileScreen()
+                    //HomeScreen()
+                    //AboutScreen()
+                    //ProfileScreen()
+                    //EditProfileScreen()
+                    //ToursScreen()
+                    //SignUpPage()
                     
 
                 }

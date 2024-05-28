@@ -25,10 +25,12 @@ interface AttractionsDao{
     suspend fun delete(attraction: Attractions)
 
     @Query("SELECT * FROM Attractions WHERE id = :id")
-    fun getTour(id: Int): Flow<Attractions>
+    fun getAttraction(id: Int): Flow<Attractions>
 
     @Query("SELECT * FROM TourAttraction " +
             "JOIN Attractions ON Attractions.id = TourAttraction.attraction_id " +
             "WHERE Attractions.id = :id")
     fun getTourAttraction(id: Int): Flow<List<TourAttraction>>
+
+
 }

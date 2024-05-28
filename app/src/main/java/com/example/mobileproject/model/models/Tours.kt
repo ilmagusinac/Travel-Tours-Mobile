@@ -14,7 +14,7 @@ data class Tours(
     val name: String,
 
     @ColumnInfo(name = "destination")
-    val destionation: String,
+    val destination: String,
 
     @ColumnInfo(name = "description")
     val description: String,

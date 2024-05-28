@@ -55,7 +55,7 @@ fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
         modifier = modifier
             .requiredWidth(width = 430.dp)
             .requiredHeight(height = 932.dp)
-            .background(color = Color(0xfff6f6f6))
+            //.background(color = Color(0xfff6f6f6))
     ) {
         Image(
             painter = painterResource(id = tour.imageRes),

@@ -16,8 +16,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -29,19 +32,37 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mobileproject.R
+import com.example.mobileproject.model.viewModel.AppViewModelProvider
+import com.example.mobileproject.model.viewModel.SignUpViewModel
+import com.example.mobileproject.model.viewModel.UsersDetails
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
+import kotlinx.coroutines.launch
 
 object SignUpDestination: NavigationDestination {
     override val route = "signup"
     override val title = "Signup"
 }
 @Composable
-fun SignUpPage(modifier: Modifier = Modifier) {
+fun SignUpPage(modifier: Modifier = Modifier,
+               viewModel: SignUpViewModel = viewModel(factory = AppViewModelProvider.Factory)
+) {
+    val coroutineScope = rememberCoroutineScope()
+    val userUiState = viewModel.userUiState
+
+    /*
+    //val coroutineScope = rememberCoroutineScope()
+    var uiState = viewModel.studentsUiState
+    var detailsState = uiState.studentsDetails
+    * */
+
     val username = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     val confirmPassword = remember { mutableStateOf("") }
     val email = remember { mutableStateOf("") }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+
     Box(
         modifier = modifier
             .requiredWidth(width = 430.dp)
@@ -265,7 +286,26 @@ fun SignUpPage(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.Start
         ) {
             Button(
-                onClick = { },
+                //onClick = { },
+                onClick = {
+                    coroutineScope.launch {
+                        viewModel.updateUiState(
+                            UsersDetails(
+                                username = username.value,
+                                email = email.value,
+                                password = password.value
+                            )
+                        )
+                        viewModel.registerUser { success, message ->
+                            if (success) {
+                                errorMessage = null
+                                // Handle successful registration, e.g., navigate to login screen
+                            } else {
+                                errorMessage = message
+                            }
+                        }
+                    }
+                },
                 shape = RoundedCornerShape(36.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
                 modifier = Modifier
@@ -290,6 +330,15 @@ fun SignUpPage(modifier: Modifier = Modifier) {
                 )
             }
 
+        }
+        errorMessage?.let {
+            Text(
+                text = it,
+                color = Color.Red,
+                modifier = Modifier
+                    .align(alignment = Alignment.Center)
+                    .offset(y = 50.dp)
+            )
         }
         Column(
             modifier = Modifier
