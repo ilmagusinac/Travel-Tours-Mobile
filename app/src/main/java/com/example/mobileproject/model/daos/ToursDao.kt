@@ -35,4 +35,5 @@ interface ToursDao{
             "JOIN Tours ON Tours.id = TourAttraction.tour_id " +
             "WHERE Tours.id = :id")
     fun getTourAttraction(id: Int): Flow<List<TourAttraction>>
+
 }

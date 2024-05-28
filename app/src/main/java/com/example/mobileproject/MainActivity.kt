@@ -19,7 +19,11 @@ import com.example.mobileproject.ui.screen.HomeScreen
 import com.example.mobileproject.ui.screen.AboutScreen
 
 import com.example.mobileproject.ui.screen.EditProfileScreen
+<<<<<<< HEAD
 import com.example.mobileproject.ui.screen.ToursViewScreen
+=======
+import com.example.mobileproject.ui.screen.SignUpPage
+>>>>>>> 74c9813f15ebcae84c508ae4133f7116fb8653aa
 
 
 class MainActivity : ComponentActivity() {
@@ -35,12 +39,21 @@ class MainActivity : ComponentActivity() {
 
                     //LoginScreen()
                     //ProfileScreen()
+<<<<<<< HEAD
                     //ToursViewScreen("tourView")
                     //AboutScreen()
                     ProfileScreen()
                     //EditProfileScreen()
                     //ToursScreen()
                     //HomeScreen()
+=======
+                    //HomeScreen()
+                    //AboutScreen()
+                    //ProfileScreen()
+                    //EditProfileScreen()
+                    //ToursScreen()
+                    //SignUpPage()
+>>>>>>> 74c9813f15ebcae84c508ae4133f7116fb8653aa
                     
 
                 }

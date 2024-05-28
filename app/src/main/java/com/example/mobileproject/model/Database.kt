@@ -22,6 +22,8 @@ abstract class UserDatabase: RoomDatabase() {
     abstract fun userDao(): UsersDao
     abstract fun tourDao(): ToursDao
     abstract fun attractionDao(): AttractionsDao
+    abstract fun reservationDao(): ReservationsDao
+    abstract fun tourAttractionDao(): TourAttractionDao
 
     companion object{
         @Volatile

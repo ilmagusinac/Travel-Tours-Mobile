@@ -17,7 +17,7 @@ class AttractionRepository(private val attractionsDao: AttractionsDao): BaseRepo
 
     override suspend fun delete(t: Attractions) = attractionsDao.delete(t)
 
-    override fun getOneStream(id: Int): Flow<Attractions?> = attractionsDao.getTour(id)
+    override fun getOneStream(id: Int): Flow<Attractions?> = attractionsDao.getAttraction(id)
 
     fun getTourAttraction(id: Int) = attractionsDao.getTourAttraction(id)
 }

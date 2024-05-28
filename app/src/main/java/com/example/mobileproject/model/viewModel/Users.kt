@@ -13,7 +13,9 @@ data class UsersDetails(
 
 data class UsersUiState(
     val usersDetails: UsersDetails = UsersDetails(),
-    val isEntryValid: Boolean = false
+    val isEntryValid: Boolean = false,
+    val registrationSuccess: Boolean = false,
+    val errorMessage: String? = null
 )
 
 fun UsersDetails.toUsers(): Users = Users(
