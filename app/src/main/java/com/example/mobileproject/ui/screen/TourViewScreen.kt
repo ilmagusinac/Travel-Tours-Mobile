@@ -50,15 +50,14 @@ object TourViewDestination : NavigationDestination {
 fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
-<<<<<<< HEAD
+
             .requiredWidth(430.dp)
             .requiredHeight(932.dp)
             .background(color = Color(0xfff6f6f6))
-=======
+
             .requiredWidth(width = 430.dp)
             .requiredHeight(height = 932.dp)
             //.background(color = Color(0xfff6f6f6))
->>>>>>> 74c9813f15ebcae84c508ae4133f7116fb8653aa
     ) {
         Image(
             painter = painterResource(id = tour.imageRes),
