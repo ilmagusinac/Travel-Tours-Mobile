@@ -13,14 +13,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
-import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -34,10 +30,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobileproject.R
+import com.example.mobileproject.model.Attraction
 import com.example.mobileproject.ui.theme.MobileProjectTheme
 import com.example.mobileproject.model.CustomNavigationBar
 import com.example.mobileproject.model.Screen
+import com.example.mobileproject.model.TourInfo
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
+
 
 object ToursDestination: NavigationDestination {
     override val route = "tours"
@@ -109,202 +108,144 @@ fun ToursScreen(modifier: Modifier = Modifier) {
             )
         }
 
-        // Grid of cards
+        AttractionGrid()
+        }
+    }
+
+@Composable
+fun TourCard(
+    imageRes: Int,
+    title: String,
+    date: String,
+    onClick: () -> Unit
+)  {
+    Box(
+        modifier = Modifier
+            .size(width = 150.dp, height = 220.dp)
+            .clip(shape = RoundedCornerShape(16.dp))
+            .background(color = Color.Gray)
+            .clickable(onClick = onClick)
+    ) {
+        // Photo
+        Image(
+            painter = painterResource(id = imageRes),
+            contentDescription = "Photo",
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(shape = RoundedCornerShape(16.dp))
+                .clickable { }
+        )
+
+        // Title and description
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.TopCenter)
-                .padding(top = 260.dp)
-                .offset(x = 50.dp)
+                .fillMaxSize()
+                .padding(18.dp)
         ) {
-            // First row of cards
+            Text(
+                text = title,
+                color = Color.White,
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            )
+            Text(
+                text = date,
+                color = Color.White,
+                style = TextStyle(fontSize = 12.sp)
+            )
+        }
+    }
+}
+
+@Composable
+fun AttractionGrid(/*navigateToTourView: (TourInfo) -> Unit*/) {
+    // Sample tour data
+    val tours = listOf(
+        TourInfo(
+            imageRes = R.drawable.tour1,
+            title = "Western Strait",
+            description = "5 attractions",
+            attractions = listOf(
+                Attraction("Attraction 1", "Description 1", R.drawable.globe),
+                Attraction("Attraction 2", "Description 2", R.drawable.globe)
+            )
+        ),
+        TourInfo(
+            imageRes = R.drawable.tour2,
+            title = "Lake cottage",
+            description = "3 attractions",
+            attractions = listOf(
+                Attraction("Attraction 1", "Description 1", R.drawable.globe),
+                Attraction("Attraction 2", "Description 2", R.drawable.globe)
+            )
+        ),
+        TourInfo(
+            imageRes = R.drawable.tour3,
+            title = "Lake cottage",
+            description = "3 attractions",
+            attractions = listOf(
+                Attraction("Attraction 1", "Description 1", R.drawable.globe),
+                Attraction("Attraction 2", "Description 2", R.drawable.globe)
+            )
+        ),
+        TourInfo(
+            imageRes = R.drawable.tour4,
+            title = "Lake cottage",
+            description = "3 attractions",
+            attractions = listOf(
+                Attraction("Attraction 1", "Description 1", R.drawable.globe),
+                Attraction("Attraction 2", "Description 2", R.drawable.globe)
+            )
+        )
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 260.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        for (i in tours.indices step 2) {
             Row(
                 modifier = Modifier.padding(bottom = 20.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // Card 1
-                Box(
-                    modifier = Modifier
-                        .size(width = 150.dp, height = 220.dp)
-                        .clip(shape = RoundedCornerShape(16.dp))
-                        .background(color = Color.Gray)
-                ) {
-                    // Photo
-                    Image(
-                        painter = painterResource(id = R.drawable.tour1),
-                        contentDescription = "Photo",
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(shape = RoundedCornerShape(16.dp))
-                            .clickable { }
-                    )
-
-                    // Title and description 1
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(18.dp)
-                    ) {
-                        Text(
-                            text = "Western Strait",
-                            color = Color.White,
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
-                        Text(
-                            text = "5 attractions",
-                            color = Color.White,
-                            style = TextStyle(fontSize = 12.sp)
-                        )
-                    }
-                }
+                TourCard(
+                    imageRes = tours[i].imageRes,
+                    title = tours[i].title,
+                    date = tours[i].description,
+                    onClick = { /*navigateToTourView(tours[i])*/ }
+                )
                 Spacer(modifier = Modifier.width(30.dp))
-
-                //Card 2
-                Box(
-                    modifier = Modifier
-                        .size(width = 150.dp, height = 220.dp)
-                        .clip(shape = RoundedCornerShape(16.dp))
-                        .background(color = Color.Gray)
-                ) {
-                    // Photo
-                    Image(
-                        painter = painterResource(id = R.drawable.tour4),
-                        contentDescription = "Photo",
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(shape = RoundedCornerShape(16.dp))
-                            .clickable { }
+                if (i + 1 < tours.size) {
+                    TourCard(
+                        imageRes = tours[i + 1].imageRes,
+                        title = tours[i + 1].title,
+                        date = tours[i + 1].description,
+                        onClick = { /*navigateToTourView(tours[i + 1])*/ }
                     )
-
-                    // Title and description
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(18.dp)
-                    ) {
-                        Text(
-                            text = "Lake cottage",
-                            color = Color.White,
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
-                        Text(
-                            text = "3 attractions",
-                            color = Color.White,
-                            style = TextStyle(fontSize = 12.sp)
-                        )
-                    }
-                }
-            }
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.TopCenter)
-                .padding(top = 510.dp)
-                .offset(x = 50.dp)
-        ) {
-            // First row of cards
-            Row(
-                modifier = Modifier.padding(bottom = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                // Card 1
-                Box(
-                    modifier = Modifier
-                        .size(width = 150.dp, height = 220.dp)
-                        .clip(shape = RoundedCornerShape(16.dp))
-                        .background(color = Color.Gray)
-                ) {
-                    // Photo
-                    Image(
-                        painter = painterResource(id = R.drawable.tour3),
-                        contentDescription = "Photo",
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(shape = RoundedCornerShape(16.dp))
-                            .clickable { }
-                    )
-
-                    // Title and description
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(18.dp)
-                    ) {
-                        Text(
-                            text = "Scottish castle",
-                            color = Color.White,
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
-                        Text(
-                            text = "7 attractions",
-                            color = Color.White,
-                            style = TextStyle(fontSize = 12.sp)
-                        )
-                    }
-                }
-
-                Spacer(modifier = Modifier.width(30.dp))
-
-                //Card 2
-                Box(
-                    modifier = Modifier
-                        .size(width = 150.dp, height = 220.dp)
-                        .clip(shape = RoundedCornerShape(16.dp))
-                        .background(color = Color.Gray)
-                ) {
-                    // Photo
-                    Image(
-                        painter = painterResource(id = R.drawable.tour2),
-                        contentDescription = "Photo",
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clip(shape = RoundedCornerShape(16.dp))
-                            .clickable { }
-                    )
-
-                    // Title and description
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(18.dp)
-                    ) {
-                        Text(
-                            text = "Forest Heaven",
-                            color = Color.White,
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                        )
-                        Text(
-                            text = "6 attractions",
-                            color = Color.White,
-                            style = TextStyle(fontSize = 12.sp)
-                        )
-                    }
                 }
             }
         }
     }
-
 }
-
 @Preview(widthDp = 430, heightDp = 932)
 @Composable
 fun ToursScreenPreview() {
     MobileProjectTheme {
         ToursScreen(Modifier)
     }
+}
+
+@Preview()
+@Composable
+fun TourCardPreview() {
+    MobileProjectTheme {
+
+    }
+    TourCard(R.drawable.tour1, "Western Strait", "22.2.2022", onClick={/**/})
 }
 
 

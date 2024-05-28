@@ -42,13 +42,15 @@ import com.example.mobileproject.R
 import com.example.mobileproject.model.CustomNavigationBar
 import com.example.mobileproject.model.Screen
 import com.example.mobileproject.ui.theme.MobileProjectTheme
-
+import com.example.mobileproject.model.TourInfo
+import com.example.mobileproject.model.sampleTour
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 
 object TourViewDestination: NavigationDestination {
     override val route = "tourview"
     override val title = "Tourview"
 }
+/*
 @Composable
 fun ToursViewScreen(modifier: Modifier = Modifier) {
     CustomNavigationBar(currentScreen = Screen.Tours)
@@ -458,7 +460,152 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
     }
     //CustomNavigationBar()
 }
+*/
+@Composable
+fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
+    CustomNavigationBar(currentScreen = Screen.Tours)
+    Box(
+        modifier = modifier
+            .requiredWidth(width = 430.dp)
+            .requiredHeight(height = 932.dp)
+            .background(color = Color(0xfff6f6f6))
+    ) {
+        Image(
+            painter = painterResource(id = tour.imageRes),
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(530.dp)
+                .offset(y = (-60).dp)
+                .align(Alignment.TopCenter),
+            contentScale = ContentScale.Crop
+        )
 
+        Text(
+            text = tour.title,
+            style = TextStyle(
+                color = Color.White,
+                fontSize = 42.sp,
+                fontWeight = FontWeight.W300
+            ),
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(bottom = 16.dp)
+                .offset(x = 80.dp, y = 270.dp)
+        )
+
+        IconButton(
+            onClick = {  },
+            modifier = Modifier.offset(x=15.dp, y=50.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.arrow),
+                contentDescription = "Favorite",
+                tint = Color.White
+            )
+        }
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(500.dp)
+                .align(Alignment.Center)
+                .offset(y = 150.dp)
+                .clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
+                .background(Color.White)
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(
+                    text = "About ${tour.title}",
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 22.sp
+                    ),
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+
+                Text(
+                    text = tour.description,
+                    style = TextStyle(
+                        fontSize = 18.sp
+                    ),
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
+
+                Text(
+                    text = "Attractions",
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 22.sp
+                    ),
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+
+                tour.attractions.forEach { attraction ->
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .padding(bottom = 8.dp)
+                            .offset(y = 10.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = attraction.iconRes),
+                            contentDescription = attraction.name,
+                            tint = Color.Red,
+                            modifier = Modifier
+                                .size(30.dp)
+                                .offset(y = 8.dp)
+                        )
+                        Spacer(modifier = Modifier.width(15.dp))
+                        Column(
+                            modifier = Modifier.padding(start = 8.dp)
+                        ) {
+                            Text(
+                                text = attraction.name,
+                                fontWeight = FontWeight.Bold,
+                                style = TextStyle(
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            )
+                            Text(
+                                text = attraction.description,
+                                fontSize = 18.sp,
+                                color = Color.Gray
+                            )
+                        }
+                    }
+                }
+
+                Button(
+                    onClick = { },
+                    shape = RoundedCornerShape(36.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
+                    modifier = Modifier
+                        //.align(alignment = Alignment.TopStart)
+                        .offset(
+                            x = 15.dp,
+                            y = 390.dp
+                        )
+                        .requiredWidth(width = 397.dp)
+                        .requiredHeight(height = 70.dp)
+                        .wrapContentHeight(align = Alignment.CenterVertically)
+                ) {
+                    Text(
+                        text = "Book a trip",
+                        color = Color(0xffffffff),
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+            }
+        }
+    }
+}
 
 
 
@@ -466,7 +613,7 @@ fun ToursViewScreen(modifier: Modifier = Modifier) {
 @Composable
 fun ToursViewScreenPreview() {
     MobileProjectTheme {
-        ToursViewScreen(Modifier)
+        ToursViewScreen(tour=sampleTour,Modifier)
     }
 }
 
