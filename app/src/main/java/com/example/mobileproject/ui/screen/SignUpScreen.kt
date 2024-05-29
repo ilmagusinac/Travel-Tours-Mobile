@@ -1,5 +1,7 @@
 package com.example.mobileproject.ui.screen
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -44,6 +46,7 @@ object SignUpDestination: NavigationDestination {
     override val route = "signup"
     override val title = "Signup"
 }
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun SignUpPage(modifier: Modifier = Modifier,
                viewModel: SignUpViewModel = viewModel(factory = AppViewModelProvider.Factory)
@@ -114,7 +117,7 @@ fun SignUpPage(modifier: Modifier = Modifier,
                         y = 30.dp))
             OutlinedTextField(
                 value = password.value,
-                onValueChange = { newValue -> password.value = newValue },
+                onValueChange = { newValue -> password.value = newValue; viewModel.updateUiState(userUiState.usersDetails.copy(password = newValue)) },
                 placeholder = { Text("Enter your password") },
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier
@@ -274,6 +277,7 @@ fun SignUpPage(modifier: Modifier = Modifier,
                     .requiredWidth(width = 25.dp)
                     .requiredHeight(height = 25.dp))
         }
+
         Column(
             modifier = Modifier
                 .align(alignment = Alignment.TopStart)
@@ -289,21 +293,22 @@ fun SignUpPage(modifier: Modifier = Modifier,
                 //onClick = { },
                 onClick = {
                     coroutineScope.launch {
-                        viewModel.updateUiState(
-                            UsersDetails(
-                                username = username.value,
-                                email = email.value,
-                                password = password.value
-                            )
-                        )
-                        viewModel.registerUser { success, message ->
+//                        viewModel.updateUiState(
+//                            UsersDetails(
+//                                username = username.value,
+//                                email = email.value,
+//                                password = password.value
+//                            )
+//                        )
+                        viewModel.registerUserTest()
+                       /*viewModel.registerUser { success, message ->
                             if (success) {
                                 errorMessage = null
                                 // Handle successful registration, e.g., navigate to login screen
                             } else {
                                 errorMessage = message
                             }
-                        }
+                        }*/
                     }
                 },
                 shape = RoundedCornerShape(36.dp),

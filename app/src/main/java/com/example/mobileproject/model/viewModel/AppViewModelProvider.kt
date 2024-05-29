@@ -4,20 +4,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-//import com.example.mobileproject.UserApplication
 import com.example.mobileproject.UserApplication
+
 
 object AppViewModelProvider {
 
     val Factory = viewModelFactory {
         initializer {
             SignUpViewModel(
-                UserApplication().container.userRepository
+                userApplication().container.userRepository
+
             )
         }
     }
 }
 
 
-fun CreationExtras.UserApplication(): UserApplication =
+fun CreationExtras.userApplication(): UserApplication =
     (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as UserApplication)

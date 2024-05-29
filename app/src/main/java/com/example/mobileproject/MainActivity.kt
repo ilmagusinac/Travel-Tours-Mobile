@@ -19,13 +19,13 @@ import com.example.mobileproject.ui.screen.HomeScreen
 import com.example.mobileproject.ui.screen.AboutScreen
 
 import com.example.mobileproject.ui.screen.EditProfileScreen
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import com.example.mobileproject.ui.screen.ToursViewScreen
-=======
+//=======
 import com.example.mobileproject.ui.screen.SignUpPage
->>>>>>> 74c9813f15ebcae84c508ae4133f7116fb8653aa
+//>>>>>>> 74c9813f15ebcae84c508ae4133f7116fb8653aa
 
-
+/*
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,28 +39,51 @@ class MainActivity : ComponentActivity() {
 
                     //LoginScreen()
                     //ProfileScreen()
-<<<<<<< HEAD
+//<<<<<<< HEAD
                     //ToursViewScreen("tourView")
                     //AboutScreen()
-                    ProfileScreen()
+                    //ProfileScreen()
                     //EditProfileScreen()
                     //ToursScreen()
                     //HomeScreen()
-=======
+//=======
                     //HomeScreen()
                     //AboutScreen()
                     //ProfileScreen()
                     //EditProfileScreen()
                     //ToursScreen()
-                    //SignUpPage()
->>>>>>> 74c9813f15ebcae84c508ae4133f7116fb8653aa
-                    
+                    SignUpPage()
+//>>>>>>> 74c9813f15ebcae84c508ae4133f7116fb8653aa
+
 
                 }
             }
         }
     }
 }
+*/
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MobileProjectTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    //LoginScreen()
+                    //RegistrationScreen(this)
+                    //ProfileScreen()
+                    //HomeScreen()
+                    //StudentNavHost(navController = rememberNavController())
+                    SignUpPage()
+                }
+            }
+        }
+    }
+}
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
