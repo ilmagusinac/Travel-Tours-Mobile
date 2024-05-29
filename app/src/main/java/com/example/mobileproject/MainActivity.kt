@@ -19,6 +19,7 @@ import com.example.mobileproject.ui.screen.HomeScreen
 import com.example.mobileproject.ui.screen.AboutScreen
 
 import com.example.mobileproject.ui.screen.EditProfileScreen
+import com.example.mobileproject.ui.screen.SignInPage
 //<<<<<<< HEAD
 import com.example.mobileproject.ui.screen.ToursViewScreen
 //=======
@@ -78,6 +79,7 @@ class MainActivity : ComponentActivity() {
                     //HomeScreen()
                     //StudentNavHost(navController = rememberNavController())
                     SignUpPage()
+                    SignInPage()
                 }
             }
         }

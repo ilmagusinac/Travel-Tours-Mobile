@@ -17,8 +17,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -30,17 +33,27 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mobileproject.R
+import com.example.mobileproject.model.viewModel.AppViewModelProvider
+import com.example.mobileproject.model.viewModel.SignInViewModel
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
+import kotlinx.coroutines.launch
 
 object SignInDestination: NavigationDestination {
     override val route = "signin"
     override val title = "Signin"
 }
 @Composable
-fun SignInPage(modifier: Modifier = Modifier) {
+fun SignInPage(modifier: Modifier = Modifier,
+               viewModel: SignInViewModel = viewModel(factory = AppViewModelProvider.Factory))
+{
+    val coroutineScope = rememberCoroutineScope()
+    val userUiState = viewModel.userUiState
+
     val password = remember { mutableStateOf("") }
     val username = remember { mutableStateOf("") }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
     Box(
         modifier = modifier
             .requiredWidth(width = 430.dp)
@@ -80,7 +93,8 @@ fun SignInPage(modifier: Modifier = Modifier) {
                         y = 30.dp))
             OutlinedTextField(
                 value = password.value,
-                onValueChange = { newValue -> password.value = newValue },
+                onValueChange = { newValue -> password.value = newValue
+                    viewModel.updatePassword(newValue)},
                 placeholder = { Text("Enter your password") },
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier
@@ -126,7 +140,8 @@ fun SignInPage(modifier: Modifier = Modifier) {
                         y = 30.dp))
             OutlinedTextField(
                 value = username.value,
-                onValueChange = { newValue -> username.value = newValue },
+                onValueChange = { newValue -> username.value = newValue
+                    viewModel.updateUsername(newValue)},
                 placeholder = { Text("Enter your username") },
                 modifier = Modifier
                     //.align(alignment = Alignment.TopStart)
@@ -161,7 +176,18 @@ fun SignInPage(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.Start
         ) {
             Button(
-                onClick = { },
+                onClick = {
+                    coroutineScope.launch {
+                        viewModel.signInUser { success, message ->
+                            if (success) {
+                                errorMessage = null
+                                // Handle successful sign-in, e.g., navigate to home screen
+                            } else {
+                                errorMessage = message
+                            }
+                        }
+                    }
+                },
                 shape = RoundedCornerShape(36.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
                 modifier = Modifier
@@ -185,6 +211,15 @@ fun SignInPage(modifier: Modifier = Modifier) {
                         y = 0.dp))
             }
 
+        }
+        errorMessage?.let {
+            Text(
+                text = it,
+                color = Color.Red,
+                modifier = Modifier
+                    .align(alignment = Alignment.Center)
+                    .offset(y = 50.dp)
+            )
         }
         Column(
             modifier = Modifier

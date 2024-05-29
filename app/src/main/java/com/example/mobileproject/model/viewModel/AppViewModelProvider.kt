@@ -16,6 +16,11 @@ object AppViewModelProvider {
 
             )
         }
+        initializer {
+            SignInViewModel(
+                userApplication().container.userRepository
+            )
+        }
     }
 }
 
