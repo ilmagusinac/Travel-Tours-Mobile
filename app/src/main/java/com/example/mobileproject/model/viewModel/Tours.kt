@@ -22,14 +22,13 @@ fun ToursDetails.toTours(): Tours = Tours(
     date = date
 )
 
-fun Tours.toToursDetails() = ToursDetails(
+fun Tours.toToursDetails(): ToursDetails = ToursDetails(
     id = id,
     name = name,
     destination = destination,
     description = description,
     date = date
 )
-
 fun Tours.toToursUiState(isEntryValid: Boolean = false): ToursUiState = ToursUiState(
     toursDetails = this.toToursDetails(),
     isEntryValid = isEntryValid

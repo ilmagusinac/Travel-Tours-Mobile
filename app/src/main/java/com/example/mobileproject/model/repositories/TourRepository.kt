@@ -19,4 +19,6 @@ class TourRepository(private val toursDao: ToursDao): BaseRepository<Tours> {
 
     fun getReservations(id: Int) = toursDao.getReservations(id)
     fun getTourAttraction(id: Int) = toursDao.getTourAttraction(id)
+
+    fun getAllTours(): Flow<List<Tours>> = toursDao.getAllTours()
 }

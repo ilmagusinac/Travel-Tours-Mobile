@@ -32,7 +32,6 @@ class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() 
     suspend fun registerUser(onResult: (Boolean, String?) -> Unit) {
         //viewModelScope.launch {
 
-
             if (validateInput()) {
                 val existingUser = userRepository.getEmail(userUiState.usersDetails.email).first()
 
