@@ -80,7 +80,9 @@ class MainActivity : ComponentActivity() {
                     //StudentNavHost(navController = rememberNavController())
                     //SignUpPage()
                     //SignInPage()
-                    EditProfileScreen(userId = 4)
+                    //EditProfileScreen(userId = 4)
+                    //ToursScreen()
+                    ProfileScreen(userId = 6){ /*onlogout*/}
                 }
             }
         }

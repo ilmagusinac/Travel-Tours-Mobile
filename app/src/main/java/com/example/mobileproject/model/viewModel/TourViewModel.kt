@@ -7,7 +7,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import com.example.mobileproject.model.repositories.TourRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
+/*
 class ToursViewModel(private val tourRepository: TourRepository) : ViewModel() {
 
     var toursUiState by mutableStateOf(ToursUiState())
@@ -52,6 +55,60 @@ class ToursViewModel(private val tourRepository: TourRepository) : ViewModel() {
     fun deleteTour(tourDetails: ToursDetails) {
         viewModelScope.launch {
             tourRepository.delete(tourDetails.toTours())
+        }
+    }
+}*/
+
+/*
+data class TourUiState(
+    val toursList: List<ToursDetails> = emptyList(),
+    val error: String? = null
+)
+
+class ToursViewModel(private val tourRepository: TourRepository) : ViewModel() {
+
+    var uiState by mutableStateOf(TourUiState())
+        private set
+
+    init {
+        fetchTours()
+    }
+
+    private fun fetchTours() {
+        viewModelScope.launch {
+            try {
+                val tours = tourRepository.getAllTours().first()
+                val firstFourTours = tours.take(4).map { it.toToursDetails() }
+                uiState = TourUiState(toursList = firstFourTours)
+            } catch (e: Exception) {
+                uiState = uiState.copy(error = e.message)
+            }
+        }
+    }
+}*/
+data class TourUiState(
+    val toursList: List<ToursDetails> = emptyList(),
+    val error: String? = null
+)
+
+class ToursViewModel(private val tourRepository: TourRepository) : ViewModel() {
+
+    private val _uiState = MutableStateFlow(TourUiState())
+    val uiState: StateFlow<TourUiState> = _uiState
+
+    init {
+        fetchTours()
+    }
+
+    private fun fetchTours() {
+        viewModelScope.launch {
+            try {
+                val tours = tourRepository.getAllTours().first()
+                val firstFourTours = tours.take(4).map { it.toToursDetails() }
+                _uiState.value = TourUiState(toursList = firstFourTours)
+            } catch (e: Exception) {
+                _uiState.value = _uiState.value.copy(error = e.message)
+            }
         }
     }
 }

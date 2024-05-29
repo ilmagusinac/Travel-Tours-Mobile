@@ -57,11 +57,17 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mobileproject.model.CustomNavigationBar
 import com.example.mobileproject.model.Screen
+import com.example.mobileproject.model.viewModel.AppViewModelProvider
+import com.example.mobileproject.model.viewModel.ProfileViewModel
+import com.example.mobileproject.model.viewModel.ToursDetails
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 
 object ProfileDestination: NavigationDestination {
@@ -69,10 +75,22 @@ object ProfileDestination: NavigationDestination {
     override val title = "Profile"
 }
 @Composable
-fun ProfileScreen(modifier: Modifier = Modifier) {
+fun ProfileScreen(modifier: Modifier = Modifier,
+                  userId: Int,
+                  viewModel: ProfileViewModel = viewModel(factory = AppViewModelProvider.Factory),
+                  onLogout: () -> Unit) {
     //var email by remember { mutableStateOf("initialEmail") }
+    val coroutineScope = rememberCoroutineScope()
+    val userUiState by viewModel::userUiState
+    val toursUiState by viewModel::toursUiState
+
     var email = "example@gmail.com"
     var username = "username"
+
+    LaunchedEffect(Unit) {
+        viewModel.fetchUserData(userId)
+        viewModel.fetchPreviousTours()
+    }
 
     Box( //NAVIGATION BOX
         modifier = modifier
@@ -142,7 +160,10 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
             .offset(x = 160.dp, y = 775.dp)
             //.requiredWidth(150.dp)
             //.requiredHeight(26.dp)
-            .clickable { /* Handle button click here */ }
+            .clickable {
+
+                viewModel.logout(onLogout)
+            }
             .background(color = Color.Transparent)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -196,7 +217,8 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                     .requiredSize(22.dp)
             )
             TextField(
-                value = email,
+                value = userUiState.usersDetails.email,
+                //value = userUiState.usersDetails.email,
                 onValueChange = { /*newEmail -> email = newEmail*/ },
                 textStyle = TextStyle(
                     color = Color(0xffadadad),
@@ -255,7 +277,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                     .requiredSize(22.dp)
             )
             TextField(
-                value = username,
+                value = userUiState.usersDetails.username,
                 onValueChange = { /*newEmail -> email = newEmail*/ },
                 textStyle = TextStyle(
                     color = Color(0xffadadad),
@@ -319,9 +341,13 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 5.dp)
-            ) {
+            ) /*{
                 items(DestinationList.destinations) { destination ->
                     BookedToursCard(destinations = destination)
+                }*/
+            {
+                items(toursUiState.toursList.filter { it.id < 5 }) { tour ->
+                    BookedToursCard(tour)
                 }
             }
 
@@ -336,9 +362,13 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 5.dp)
-            ) {
+            ) /*{
                 items(DestinationList.destinations) { destination ->
                     HistoryDestinationCard(destinations = destination)
+                }*/
+            {
+                items(toursUiState.toursList.filter { it.id >= 5 }) { tour ->
+                    HistoryDestinationCard(tour)
                 }
             }
 
@@ -347,7 +377,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
     }
 }
 
-
+/*
 @Composable
 fun HistoryDestinationCard(destinations : Destination){
     Card(
@@ -468,12 +498,129 @@ fun BookedToursCard(destinations: Destination) {
     }
 
 }
+*/
+@Composable
+fun HistoryDestinationCard(tour: ToursDetails) {
+    Card(
+        modifier = Modifier
+            .padding(20.dp)
+            .requiredWidth(345.dp)
+            .requiredHeight(70.dp)
+            .clip(RoundedCornerShape(36.dp))
+            .background(Color.White)
+            .border(
+                border = BorderStroke(1.dp, Color(0xffe9e9e9)),
+                shape = RoundedCornerShape(36.dp)
+            ),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
+    ) {
+        Row(
+            verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier.padding(top = 15.dp, bottom = 15.dp, start = 10.dp, end = 10.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.tour1), // Use appropriate image resource
+                contentDescription = "History of booked tours",
+                modifier = Modifier
+                    .requiredWidth(120.dp)
+                    .requiredHeight(55.dp)
+                    .clip(RoundedCornerShape(36.dp))
+                    .background(Color(0xffc4c4c4)),
+                contentScale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Column {
+                Text(
+                    text = tour.name,
+                    fontSize = 14.sp,
+                    color = Color(0xffadadad)
+                )
+                Spacer(modifier = Modifier.height(5.dp))
+                Row {
+                    Text(
+                        text = tour.destination,
+                        fontSize = 12.sp,
+                        color = Color(0xffadadad)
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Text(
+                        text = tour.date,
+                        fontSize = 12.sp,
+                        color = Color(0xffadadad)
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun BookedToursCard(tour: ToursDetails) {
+    Card(
+        modifier = Modifier
+            .padding(20.dp)
+            .requiredWidth(345.dp)
+            .requiredHeight(70.dp)
+            .clip(RoundedCornerShape(36.dp))
+            .background(Color.White)
+            .border(
+                border = BorderStroke(1.dp, Color(0xffe9e9e9)),
+                shape = RoundedCornerShape(36.dp)
+            ),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 8.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.tour1), // Use appropriate image resource
+                contentDescription = "Booked Tours",
+                modifier = Modifier
+                    .requiredWidth(85.dp)
+                    .requiredHeight(55.dp)
+                    .clip(RoundedCornerShape(36.dp))
+                    .background(Color(0xffc4c4c4)),
+                contentScale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                text = tour.name,
+                fontSize = 12.sp,
+                color = Color(0xffadadad),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(vertical = 5.dp)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Button(
+                onClick = { /* Handle button click here */ },
+                modifier = Modifier
+                    .requiredHeight(36.dp)
+                    .clip(RoundedCornerShape(36.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3))
+            ) {
+                Text(
+                    text = "Cancel",
+                    color = Color.White,
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
+        }
+    }
+}
 
 @Preview(widthDp = 430, heightDp = 932)
 @Composable
 fun ProfileScreenPreview(){
     MobileProjectTheme {
-        ProfileScreen(Modifier)
+        //ProfileScreen(Modifier)
+        ProfileScreen(Modifier, userId = 1, onLogout = {})
     }
 
 }
@@ -484,7 +631,8 @@ fun DestinationHistoryCardPreview(){
     MobileProjectTheme {
 
     }
-    HistoryDestinationCard(DestinationList.destinations[0])
+    //HistoryDestinationCard(DestinationList.destinations[0])
+    HistoryDestinationCard(ToursDetails(id = 5, name = "Sample Tour", destination = "Sample Destination", description = "Sample Description", date = "01.01.2023"))
 
 }
 
@@ -494,6 +642,7 @@ fun BookedToursCardPreview(){
     MobileProjectTheme {
 
     }
-    BookedToursCard(DestinationList.destinations[0])
+    //BookedToursCard(DestinationList.destinations[0])
+    BookedToursCard(ToursDetails(id = 1, name = "Sample Tour", destination = "Sample Destination", description = "Sample Description", date = "01.01.2023"))
 
 }

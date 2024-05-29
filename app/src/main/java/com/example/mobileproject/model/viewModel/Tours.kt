@@ -11,7 +11,8 @@ data class ToursDetails(
 )
 
 data class ToursUiState(
-    val toursDetails: ToursDetails = ToursDetails(),
+    //val toursDetails: ToursDetails = ToursDetails(),
+    val toursList: List<ToursDetails> = emptyList(),
     val isEntryValid: Boolean = false
 )
 fun ToursDetails.toTours(): Tours = Tours(
@@ -30,6 +31,7 @@ fun Tours.toToursDetails(): ToursDetails = ToursDetails(
     date = date
 )
 fun Tours.toToursUiState(isEntryValid: Boolean = false): ToursUiState = ToursUiState(
-    toursDetails = this.toToursDetails(),
+    //toursDetails = this.toToursDetails(),
+    toursList = listOf(this.toToursDetails()),
     isEntryValid = isEntryValid
 )
