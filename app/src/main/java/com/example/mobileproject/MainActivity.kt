@@ -78,8 +78,9 @@ class MainActivity : ComponentActivity() {
                     //ProfileScreen()
                     //HomeScreen()
                     //StudentNavHost(navController = rememberNavController())
-                    SignUpPage()
-                    SignInPage()
+                    //SignUpPage()
+                    //SignInPage()
+                    EditProfileScreen(userId = 4)
                 }
             }
         }

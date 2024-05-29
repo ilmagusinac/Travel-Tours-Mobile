@@ -39,6 +39,8 @@ import com.example.mobileproject.model.viewModel.AppViewModelProvider
 import com.example.mobileproject.model.viewModel.SignInViewModel
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 import kotlinx.coroutines.launch
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 
 object SignInDestination: NavigationDestination {
     override val route = "signin"
@@ -48,12 +50,20 @@ object SignInDestination: NavigationDestination {
 fun SignInPage(modifier: Modifier = Modifier,
                viewModel: SignInViewModel = viewModel(factory = AppViewModelProvider.Factory))
 {
+    val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val userUiState = viewModel.userUiState
 
     val password = remember { mutableStateOf("") }
     val username = remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
+    var showToast by remember { mutableStateOf(false) }
+
+    if (showToast) {
+        Toast.makeText(context, "You have successfully logged in", Toast.LENGTH_SHORT).show()
+        showToast = false
+    }
+
     Box(
         modifier = modifier
             .requiredWidth(width = 430.dp)
@@ -181,6 +191,7 @@ fun SignInPage(modifier: Modifier = Modifier,
                         viewModel.signInUser { success, message ->
                             if (success) {
                                 errorMessage = null
+                                showToast = true
                                 // Handle successful sign-in, e.g., navigate to home screen
                             } else {
                                 errorMessage = message

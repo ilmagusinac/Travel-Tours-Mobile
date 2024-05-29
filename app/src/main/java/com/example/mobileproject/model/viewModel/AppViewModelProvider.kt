@@ -21,6 +21,11 @@ object AppViewModelProvider {
                 userApplication().container.userRepository
             )
         }
+        initializer {
+            EditProfileViewModel(
+                userApplication().container.userRepository
+            )
+        }
     }
 }
 

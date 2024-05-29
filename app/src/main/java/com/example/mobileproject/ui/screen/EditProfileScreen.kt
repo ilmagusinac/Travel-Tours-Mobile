@@ -22,25 +22,33 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mobileproject.R
 import com.example.mobileproject.ui.theme.MobileProjectTheme
 import com.example.mobileproject.model.CustomNavigationBar
 import com.example.mobileproject.model.Screen
+import com.example.mobileproject.model.viewModel.AppViewModelProvider
+import com.example.mobileproject.model.viewModel.EditProfileViewModel
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
+import kotlinx.coroutines.launch
+import android.widget.Toast
 
 object EditProfileDestination : NavigationDestination {
     override val route = "edit"
@@ -48,7 +56,26 @@ object EditProfileDestination : NavigationDestination {
 }
 
 @Composable
-fun EditProfileScreen(modifier: Modifier = Modifier) {
+fun EditProfileScreen(modifier: Modifier = Modifier,
+        userId: Int,
+        viewModel: EditProfileViewModel = viewModel(factory = AppViewModelProvider.Factory)
+) {
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val userUiState by viewModel::userUiState
+
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+    var showToast by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        viewModel.fetchUserData(userId)
+    }
+
+    if (showToast) {
+        Toast.makeText(context, "You have edited your profile successfully", Toast.LENGTH_SHORT).show()
+        showToast = false
+    }
+
     var text by remember { mutableStateOf("") }
     var text2 by remember { mutableStateOf("") }
 
@@ -117,8 +144,8 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                         .border(BorderStroke(1.dp, Color(0xffe9e9e9)), RoundedCornerShape(36.dp))
                 ) {
                     TextField(
-                        value = text,
-                        onValueChange = { text = it },
+                        value = userUiState.usersDetails.email,
+                        onValueChange = { viewModel.updateEmail(it)  },
                         colors = TextFieldDefaults.colors(
                             focusedContainerColor = Color.Transparent,
                             unfocusedContainerColor = Color.Transparent,
@@ -159,8 +186,8 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                         .border(BorderStroke(1.dp, Color(0xffe9e9e9)), RoundedCornerShape(36.dp))
                 ) {
                     TextField(
-                        value = text2,
-                        onValueChange = { text2 = it },
+                        value = userUiState.usersDetails.username,
+                        onValueChange = { viewModel.updateUsername(it) },
                         colors = TextFieldDefaults.colors(
                             focusedContainerColor = Color.Transparent,
                             unfocusedContainerColor = Color.Transparent,
@@ -184,7 +211,19 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                 }
 
                 Button(
-                    onClick = { /* Save changes */ },
+                    onClick = {
+                        coroutineScope.launch {
+                            viewModel.saveChanges { success, message ->
+                                if (success) {
+                                    errorMessage = null
+                                    showToast = true
+                                    // Handle successful save, e.g., navigate to profile screen
+                                } else {
+                                    errorMessage = message
+                                }
+                            }
+                        }
+                    },
                     shape = RoundedCornerShape(36.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
                     modifier = Modifier
@@ -200,6 +239,16 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
             }
         }
 
+        errorMessage?.let {
+            Text(
+                text = it,
+                color = Color.Red,
+                modifier = Modifier
+                    .align(alignment = Alignment.Center)
+                    .offset(y = 50.dp)
+            )
+        }
+
         CustomNavigationBar(currentScreen = Screen.Profile)
     }
 }
@@ -208,6 +257,6 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
 @Composable
 fun EditProfileScreenPreview() {
     MobileProjectTheme {
-        EditProfileScreen()
+        EditProfileScreen(userId = 1)
     }
 }
