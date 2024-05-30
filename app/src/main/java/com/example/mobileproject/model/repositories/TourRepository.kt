@@ -7,6 +7,13 @@ import com.example.mobileproject.model.daos.UsersDao
 import com.example.mobileproject.model.models.Tours
 import com.example.mobileproject.model.models.Users
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import androidx.room.Dao
+import androidx.room.Query
+import com.example.mobileproject.model.models.Reservations
+import com.example.mobileproject.model.models.toTour
+import kotlinx.coroutines.flow.flatMapConcat
 
 class TourRepository(private val toursDao: ToursDao): BaseRepository<Tours> {
     override suspend fun insert(t: Tours) = toursDao.insert(t)
@@ -21,4 +28,11 @@ class TourRepository(private val toursDao: ToursDao): BaseRepository<Tours> {
     fun getTourAttraction(id: Int) = toursDao.getTourAttraction(id)
 
     fun getAllTours(): Flow<List<Tours>> = toursDao.getAllTours()
+    fun getUserBookedTours(userId: Int): Flow<List<Tours>> {
+        return toursDao.getUserBookedTours(userId).flatMapConcat { reservations ->
+            getAllTours().map { tours ->
+                reservations.mapNotNull { reservation -> reservation.toTour(tours) }
+            }
+        }
+    }
 }

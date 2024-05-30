@@ -38,4 +38,7 @@ interface ToursDao{
 
     @Query("SELECT * FROM Tours")
     fun getAllTours(): Flow<List<Tours>>
+
+    @Query("SELECT * FROM Reservations WHERE user_id = :userId")
+    fun getUserBookedTours(userId: Int): Flow<List<Reservations>>
 }

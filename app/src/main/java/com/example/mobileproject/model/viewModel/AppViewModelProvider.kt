@@ -34,7 +34,8 @@ object AppViewModelProvider {
         initializer {
             ProfileViewModel(
                 userApplication().container.userRepository,
-                userApplication().container.tourRepository
+                userApplication().container.tourRepository,
+                userApplication().container.reservationRepository
             )
         }
         initializer {

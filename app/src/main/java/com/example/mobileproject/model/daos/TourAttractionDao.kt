@@ -24,4 +24,6 @@ interface TourAttractionDao {
 
     @Query("SELECT * FROM TourAttraction WHERE id = :id")
     fun getTourAttraction(id: Int): Flow<TourAttraction>
+
+
 }

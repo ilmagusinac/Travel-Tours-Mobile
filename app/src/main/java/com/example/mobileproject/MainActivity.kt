@@ -75,15 +75,15 @@ class MainActivity : ComponentActivity() {
                 ) {
                     //LoginScreen()
                     //RegistrationScreen(this)
-                    //ProfileScreen()
+                    //ProfileScreen(userId = 3){ /*onlogout*/}
                     //HomeScreen()
                     //StudentNavHost(navController = rememberNavController())
                     //SignUpPage()
                     //SignInPage()
                     //EditProfileScreen(userId = 4)
                     //ToursScreen()
-                    //ProfileScreen(userId = 6){ /*onlogout*/}
-                    ToursViewScreen(tourId = 2, 4)
+                    ProfileScreen(userId = 1){ /*onlogout*/}
+                    //ToursViewScreen(tourId = 4, userId = 7)
                 }
             }
         }

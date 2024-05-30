@@ -34,3 +34,6 @@ data class Reservations(
     @ColumnInfo(name = "tour_id")
     val tourId: Int
 )
+fun Reservations.toTour(tours: List<Tours>): Tours? {
+    return tours.find { it.id == this.tourId }
+}

@@ -55,6 +55,8 @@ import com.example.mobileproject.model.Destination
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.selection.TextSelectionColors
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.LaunchedEffect
@@ -62,6 +64,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mobileproject.model.CustomNavigationBar
 import com.example.mobileproject.model.Screen
@@ -83,6 +87,7 @@ fun ProfileScreen(modifier: Modifier = Modifier,
     val coroutineScope = rememberCoroutineScope()
     val userUiState by viewModel::userUiState
     val toursUiState by viewModel::toursUiState
+    val context = LocalContext.current
 
     var email = "example@gmail.com"
     var username = "username"
@@ -90,6 +95,7 @@ fun ProfileScreen(modifier: Modifier = Modifier,
     LaunchedEffect(Unit) {
         viewModel.fetchUserData(userId)
         viewModel.fetchPreviousTours()
+        viewModel.fetchBookedTours(userId)
     }
 
     Box( //NAVIGATION BOX
@@ -347,7 +353,7 @@ fun ProfileScreen(modifier: Modifier = Modifier,
                 }*/
             {
                 items(toursUiState.toursList.filter { it.id < 5 }) { tour ->
-                    BookedToursCard(tour)
+                    BookedToursCard(tour,userId, viewModel)
                 }
             }
 
@@ -362,11 +368,7 @@ fun ProfileScreen(modifier: Modifier = Modifier,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 5.dp)
-            ) /*{
-                items(DestinationList.destinations) { destination ->
-                    HistoryDestinationCard(destinations = destination)
-                }*/
-            {
+            ) {
                 items(toursUiState.toursList.filter { it.id >= 5 }) { tour ->
                     HistoryDestinationCard(tour)
                 }
@@ -554,7 +556,69 @@ fun HistoryDestinationCard(tour: ToursDetails) {
         }
     }
 }
+/*
+@Composable
+fun BookedToursCard(tour: ToursDetails) {
+    Card(
+        modifier = Modifier
+            .padding(20.dp)
+            .requiredWidth(345.dp)
+            .requiredHeight(70.dp)
+            .clip(RoundedCornerShape(36.dp))
+            .background(Color.White)
+            .border(
+                border = BorderStroke(1.dp, Color(0xffe9e9e9)),
+                shape = RoundedCornerShape(36.dp)
+            ),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 8.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.tour1), // Use appropriate image resource
+                contentDescription = "Booked Tours",
+                modifier = Modifier
+                    .requiredWidth(85.dp)
+                    .requiredHeight(55.dp)
+                    .clip(RoundedCornerShape(36.dp))
+                    .background(Color(0xffc4c4c4)),
+                contentScale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                text = tour.name,
+                fontSize = 12.sp,
+                color = Color(0xffadadad),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(vertical = 5.dp)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Button(
+                onClick = { /* Handle button click here */ },
+                modifier = Modifier
+                    .requiredHeight(36.dp)
+                    .clip(RoundedCornerShape(36.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3))
+            ) {
+                Text(
+                    text = "Cancel",
+                    color = Color.White,
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
+        }
+    }
+}
+*/
 
+/*
 @Composable
 fun BookedToursCard(tour: ToursDetails) {
     Card(
@@ -615,6 +679,163 @@ fun BookedToursCard(tour: ToursDetails) {
     }
 }
 
+ */
+/*
+@Composable
+fun BookedToursCard(
+    tour: ToursDetails,
+    userId: Int,
+    viewModel: ProfileViewModel = viewModel(factory = AppViewModelProvider.Factory)
+) {
+    var showDialog by remember { mutableStateOf(false) }
+    Card(
+        modifier = Modifier
+            .padding(20.dp)
+            .requiredWidth(345.dp)
+            .requiredHeight(70.dp)
+            .clip(RoundedCornerShape(36.dp))
+            .background(Color.White)
+            .border(
+                border = BorderStroke(1.dp, Color(0xffe9e9e9)),
+                shape = RoundedCornerShape(36.dp)
+            ),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 8.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.tour1), // Use appropriate image resource
+                contentDescription = "Booked Tours",
+                modifier = Modifier
+                    .requiredWidth(85.dp)
+                    .requiredHeight(55.dp)
+                    .clip(RoundedCornerShape(36.dp))
+                    .background(Color(0xffc4c4c4)),
+                contentScale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                text = tour.name,
+                fontSize = 12.sp,
+                color = Color(0xffadadad),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(vertical = 5.dp)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Button(
+                onClick = {
+                    viewModel.cancelReservation(userId, tour.id)
+                },
+                modifier = Modifier
+                    .requiredHeight(36.dp)
+                    .clip(RoundedCornerShape(36.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3))
+            ) {
+                Text(
+                    text = "Cancel",
+                    color = Color.White,
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
+        }
+    }
+}*/
+
+@Composable
+fun BookedToursCard(
+    tour: ToursDetails,
+    userId: Int,
+    viewModel: ProfileViewModel = viewModel(factory = AppViewModelProvider.Factory)
+) {
+    var showDialog by remember { mutableStateOf(false) }
+
+    Card(
+        modifier = Modifier
+            .padding(20.dp)
+            .requiredWidth(345.dp)
+            .requiredHeight(70.dp)
+            .clip(RoundedCornerShape(36.dp))
+            .background(Color.White)
+            .border(
+                border = BorderStroke(1.dp, Color(0xffe9e9e9)),
+                shape = RoundedCornerShape(36.dp)
+            ),
+        colors = CardDefaults.cardColors(containerColor = Color.White)
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start,
+            modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 8.dp)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.tour1), // Use appropriate image resource
+                contentDescription = "Booked Tours",
+                modifier = Modifier
+                    .requiredWidth(85.dp)
+                    .requiredHeight(55.dp)
+                    .clip(RoundedCornerShape(36.dp))
+                    .background(Color(0xffc4c4c4)),
+                contentScale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Text(
+                text = tour.name,
+                fontSize = 12.sp,
+                color = Color(0xffadadad),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(vertical = 5.dp)
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Button(
+                onClick = {
+                    showDialog = true
+                },
+                modifier = Modifier
+                    .requiredHeight(36.dp)
+                    .clip(RoundedCornerShape(36.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3))
+            ) {
+                Text(
+                    text = "Cancel",
+                    color = Color.White,
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+            }
+        }
+    }
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text(text = "Confirm Cancellation") },
+            text = { Text(text = "Do you really want to delete the booked trip?") },
+            confirmButton = {
+                TextButton(onClick = {
+                    viewModel.cancelReservation(userId, tour.id)
+                    showDialog = false
+                }) {
+                    Text("Yes")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDialog = false }) {
+                    Text("No")
+                }
+            }
+        )
+    }
+}
 @Preview(widthDp = 430, heightDp = 932)
 @Composable
 fun ProfileScreenPreview(){
@@ -643,6 +864,6 @@ fun BookedToursCardPreview(){
 
     }
     //BookedToursCard(DestinationList.destinations[0])
-    BookedToursCard(ToursDetails(id = 1, name = "Sample Tour", destination = "Sample Destination", description = "Sample Description", date = "01.01.2023"))
+    BookedToursCard(ToursDetails(id = 1, name = "Sample Tour", destination = "Sample Destination", description = "Sample Description", date = "01.01.2023"), 1)
 
 }

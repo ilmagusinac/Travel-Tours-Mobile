@@ -14,4 +14,8 @@ class ReservationRepository(private val reservationsDao: ReservationsDao): BaseR
     override fun getOneStream(id: Int): Flow<Reservations?> = reservationsDao.getReservation(id)
 
     fun getReservationByUserAndTour(userId: Int, tourId: Int): Flow<Reservations?> = reservationsDao.getReservationByUserAndTour(userId, tourId)
+
+    suspend fun deleteByUserIdAndTourId(userId: Int, tourId: Int) {
+        reservationsDao.deleteByUserIdAndTourId(userId, tourId)
+    }
 }
