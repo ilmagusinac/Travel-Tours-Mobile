@@ -24,7 +24,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -35,12 +34,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mobileproject.R
-import com.example.mobileproject.model.viewModel.AppViewModelProvider
-import com.example.mobileproject.model.viewModel.SignInViewModel
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 import android.widget.Toast
 import androidx.compose.ui.platform.LocalContext
+import com.example.mobileproject.model.viewModel.AppViewModelProvider
+import com.example.mobileproject.model.viewModel.SignInViewModel
 
 object SignInDestination: NavigationDestination {
     override val route = "signin"
@@ -48,11 +47,15 @@ object SignInDestination: NavigationDestination {
 }
 @Composable
 fun SignInPage(modifier: Modifier = Modifier,
+               navigateToSignUpPage: () -> Unit={},
+               navigateToHomePage: () -> Unit={},
+               navigateToSplashPage: ()-> Unit = {},
                viewModel: SignInViewModel = viewModel(factory = AppViewModelProvider.Factory))
 {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
     val userUiState = viewModel.userUiState
+
 
     val password = remember { mutableStateOf("") }
     val username = remember { mutableStateOf("") }
@@ -72,7 +75,7 @@ fun SignInPage(modifier: Modifier = Modifier,
     ) {
 
         IconButton(
-            onClick = {  },
+            onClick = { navigateToSplashPage },
             modifier = Modifier.offset(x=15.dp, y=50.dp)
         ) {
             Icon(
@@ -187,12 +190,13 @@ fun SignInPage(modifier: Modifier = Modifier,
         ) {
             Button(
                 onClick = {
+
                     coroutineScope.launch {
                         viewModel.signInUser { success, message ->
                             if (success) {
                                 errorMessage = null
                                 showToast = true
-                                // Handle successful sign-in, e.g., navigate to home screen
+                                navigateToHomePage
                             } else {
                                 errorMessage = message
                             }
@@ -253,7 +257,7 @@ fun SignInPage(modifier: Modifier = Modifier,
                     //.align(alignment = Alignment.TopStart)
                     .offset(x = 50.dp,
                         y = 10.dp)
-                    .clickable {  }
+                    .clickable { navigateToSignUpPage }
             )
             Icon(
                 painter = painterResource(id = R.drawable.more_circle),

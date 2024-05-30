@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.mobileproject.ui.theme.MobileProjectTheme
 
 import com.example.mobileproject.ui.screen.ProfileScreen
@@ -24,7 +25,8 @@ import com.example.mobileproject.ui.screen.SignInPage
 import com.example.mobileproject.ui.screen.ToursViewScreen
 //=======
 import com.example.mobileproject.ui.screen.SignUpPage
-//>>>>>>> 74c9813f15ebcae84c508ae4133f7116fb8653aa
+import com.example.myapplication.ui.screen.navigation.UserNavHost
+
 
 /*
 class MainActivity : ComponentActivity() {
@@ -40,21 +42,19 @@ class MainActivity : ComponentActivity() {
 
                     //LoginScreen()
                     //ProfileScreen()
-//<<<<<<< HEAD
                     //ToursViewScreen("tourView")
                     //AboutScreen()
                     //ProfileScreen()
                     //EditProfileScreen()
                     //ToursScreen()
                     //HomeScreen()
-//=======
+
                     //HomeScreen()
                     //AboutScreen()
                     //ProfileScreen()
                     //EditProfileScreen()
                     //ToursScreen()
                     SignUpPage()
-//>>>>>>> 74c9813f15ebcae84c508ae4133f7116fb8653aa
 
 
                 }
@@ -84,6 +84,8 @@ class MainActivity : ComponentActivity() {
                     //ToursScreen()
                     ProfileScreen(userId = 1){ /*onlogout*/}
                     //ToursViewScreen(tourId = 4, userId = 7)
+                    SignUpPage()
+                    UserNavHost(navController = rememberNavController())
                 }
             }
         }

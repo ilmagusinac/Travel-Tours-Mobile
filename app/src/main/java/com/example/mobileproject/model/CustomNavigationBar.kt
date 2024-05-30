@@ -30,14 +30,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mobileproject.R
 import com.example.mobileproject.ui.screen.HomeScreen
+import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 import com.example.mobileproject.ui.theme.MobileProjectTheme
+
 
 enum class Screen {
     Home, Tours, About, Profile
 }
 
 @Composable
-fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen) {
+fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen,
+                        navigateToHomePage: ()-> Unit ={},
+                        navigateToToursPage: ()-> Unit ={},
+                        navigateToAboutUsPage: ()-> Unit ={},
+                        navigateToProfilePage: ()-> Unit ={}) {
 
     Box(
         modifier = modifier
@@ -60,7 +66,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen) {
             ) {
 
                 IconButton( //HOME BUTTON
-                    onClick = { },
+                    onClick = { navigateToHomePage },
 
                     modifier = Modifier
                         .size(90.dp)
@@ -95,7 +101,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen) {
                 }
 
                 IconButton( //TOURS BUTTON
-                    onClick = { },
+                    onClick = { navigateToToursPage },
                     modifier = Modifier
                         .size(90.dp)
                         .align(alignment = Alignment.TopStart)
@@ -135,7 +141,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen) {
                 }
 
                 IconButton( //ABOUT BUTTON
-                    onClick = { },
+                    onClick = { navigateToAboutUsPage },
                     modifier = Modifier
                         .size(90.dp)
                         .align(alignment = Alignment.TopStart)
@@ -175,7 +181,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen) {
                 }
 
                 IconButton( //PROFILE BUTTON
-                    onClick = { },
+                    onClick = { navigateToProfilePage },
                     modifier = Modifier
                         .size(90.dp)
                         .align(alignment = Alignment.TopStart)

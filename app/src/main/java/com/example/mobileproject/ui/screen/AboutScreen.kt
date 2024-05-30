@@ -57,7 +57,10 @@ object AboutDestination: NavigationDestination {
     override val title = "About"
 }
 @Composable
-fun AboutScreen(modifier: Modifier = Modifier) {
+fun AboutScreen(modifier: Modifier = Modifier,
+                navigateToHomePage: ()-> Unit ={},
+                navigateToToursPage: ()-> Unit ={},
+                navigateToProfilePage: ()-> Unit ={}) {
     val context = LocalContext.current
 
     Box( //NAVIGATION BOX

@@ -51,7 +51,8 @@ object SignUpDestination: NavigationDestination {
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun SignUpPage(modifier: Modifier = Modifier,
-               viewModel: SignUpViewModel = viewModel(factory = AppViewModelProvider.Factory)
+               viewModel: SignUpViewModel = viewModel(factory = AppViewModelProvider.Factory),
+               navigateToSignInPage: ()-> Unit={}
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -84,7 +85,7 @@ fun SignUpPage(modifier: Modifier = Modifier,
 
 
         IconButton(
-            onClick = {  },
+            onClick = { navigateToSignInPage },
             modifier = Modifier.offset(x=15.dp, y=50.dp)
         ) {
             Icon(
@@ -301,6 +302,7 @@ fun SignUpPage(modifier: Modifier = Modifier,
             Button(
                 //onClick = { },
                 onClick = {
+                    navigateToSignInPage
                     coroutineScope.launch {
 //                        viewModel.updateUiState(
 //                            UsersDetails(

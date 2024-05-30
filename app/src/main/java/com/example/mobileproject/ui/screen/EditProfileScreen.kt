@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -57,6 +58,10 @@ object EditProfileDestination : NavigationDestination {
 
 @Composable
 fun EditProfileScreen(modifier: Modifier = Modifier,
+                      navigateToHomePage: ()-> Unit ={},
+                      navigateToToursPage: ()-> Unit ={},
+                      navigateToAboutUsPage: ()-> Unit ={},
+                      navigateToProfilePage: ()-> Unit ={},
         userId: Int,
         viewModel: EditProfileViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -217,13 +222,14 @@ fun EditProfileScreen(modifier: Modifier = Modifier,
                                 if (success) {
                                     errorMessage = null
                                     showToast = true
-                                    // Handle successful save, e.g., navigate to profile screen
+                                    navigateToProfilePage
                                 } else {
                                     errorMessage = message
                                 }
                             }
                         }
                     },
+
                     shape = RoundedCornerShape(36.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
                     modifier = Modifier
@@ -233,7 +239,7 @@ fun EditProfileScreen(modifier: Modifier = Modifier,
                     Text(
                         text = "Save Changes",
                         color = Color.White,
-                        style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                        style = TextStyle(fontSize = 14.sp, fontWeight = FontWeight.Bold),
                     )
                 }
             }

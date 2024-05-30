@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,15 +22,14 @@ import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
@@ -46,15 +44,7 @@ import androidx.compose.ui.unit.sp
 import com.example.mobileproject.R
 import com.example.mobileproject.ui.theme.MobileProjectTheme
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
 import androidx.compose.ui.layout.ContentScale
-import com.example.mobileproject.model.DestinationList
-import com.example.mobileproject.model.Destination
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -80,9 +70,16 @@ object ProfileDestination: NavigationDestination {
 }
 @Composable
 fun ProfileScreen(modifier: Modifier = Modifier,
+                  navigateToEditProfilePage: ()-> Unit={},
+                  navigateToSignInPage: ()-> Unit={},
+                  navigateToHomePage: ()-> Unit ={},
+                  navigateToToursPage: ()-> Unit ={},
+                  navigateToAboutUsPage: ()-> Unit ={},
+                  navigateToProfilePage: ()-> Unit ={},
                   userId: Int,
                   viewModel: ProfileViewModel = viewModel(factory = AppViewModelProvider.Factory),
                   onLogout: () -> Unit) {
+
     //var email by remember { mutableStateOf("initialEmail") }
     val coroutineScope = rememberCoroutineScope()
     val userUiState by viewModel::userUiState
@@ -183,6 +180,7 @@ fun ProfileScreen(modifier: Modifier = Modifier,
             Text(
                 text = "Log Out",
                 color = Color(0xff0373f3),
+                modifier = Modifier.clickable { navigateToSignInPage },
                 style = TextStyle(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
@@ -307,7 +305,7 @@ fun ProfileScreen(modifier: Modifier = Modifier,
             )
         }
         Button(//EDIT PROFILE BUTTON
-            onClick = { },
+            onClick = { navigateToEditProfilePage },
             shape = RoundedCornerShape(36.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
             modifier = Modifier

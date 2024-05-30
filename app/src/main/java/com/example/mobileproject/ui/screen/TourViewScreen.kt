@@ -52,12 +52,17 @@ import com.example.mobileproject.model.viewModel.ToursViewViewModel
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 
 object TourViewDestination : NavigationDestination {
-    override val route = "tourview"
+    override val route = "tourview/{tourId}"
     override val title = "Tourview"
 }
 /*
 @Composable
-fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
+fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier,
+                    tourId: String,
+                    navigateToHomePage: ()-> Unit ={},
+                    navigateToAboutUsPage: ()-> Unit ={},
+                    navigateToProfilePage: ()-> Unit ={},
+                    navigateToToursPage: ()-> Unit ={}) {
     Box(
         modifier = modifier
 
@@ -94,7 +99,7 @@ fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
         )
 
         IconButton(
-            onClick = { },
+            onClick = { navigateToToursPage },
             modifier = Modifier.offset(x = 15.dp, y = 50.dp)
         ) {
             Icon(
@@ -200,7 +205,7 @@ fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier) {
 @Composable
 fun ToursViewScreenPreview() {
     MobileProjectTheme {
-        ToursViewScreen(tour = sampleTour, Modifier)
+        ToursViewScreen(tour = sampleTour, Modifier, "5")
     }
 }
 */

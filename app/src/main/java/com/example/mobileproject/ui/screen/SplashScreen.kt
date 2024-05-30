@@ -34,7 +34,9 @@ object SplashDestination: NavigationDestination {
     override val title = "Splash"
 }
 @Composable
-fun SplashScreen(modifier: Modifier = Modifier) {
+fun SplashScreen(modifier: Modifier = Modifier,
+                 navigateToSignInPage: () -> Unit={}
+) {
     Box(
         modifier = modifier
             .requiredWidth(width = 430.dp)
@@ -51,7 +53,7 @@ fun SplashScreen(modifier: Modifier = Modifier) {
             contentAlignment = Alignment.Center
         ) {
             Button(
-                onClick = { },
+                onClick = { navigateToSignInPage },
                 shape = RoundedCornerShape(36.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
                 modifier = Modifier
