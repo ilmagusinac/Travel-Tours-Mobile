@@ -39,11 +39,8 @@ enum class Screen {
 }
 
 @Composable
-fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen,
-                        navigateToHomePage: ()-> Unit ={},
-                        navigateToToursPage: ()-> Unit ={},
-                        navigateToAboutUsPage: ()-> Unit ={},
-                        navigateToProfilePage: ()-> Unit ={}) {
+fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen=Screen.Home,
+                        onItemSelected:(Int)->Unit={}) {
 
     Box(
         modifier = modifier
@@ -54,7 +51,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen,
                 .align(alignment = Alignment.TopStart)
                 .offset(
                     x = 0.dp,
-                    y = 820.dp
+                    y = 720.dp
                 )
         ) {
             Box(
@@ -66,7 +63,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen,
             ) {
 
                 IconButton( //HOME BUTTON
-                    onClick = { navigateToHomePage },
+                    onClick = { onItemSelected(0) },
 
                     modifier = Modifier
                         .size(90.dp)
@@ -101,7 +98,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen,
                 }
 
                 IconButton( //TOURS BUTTON
-                    onClick = { navigateToToursPage },
+                    onClick = { onItemSelected(1) },
                     modifier = Modifier
                         .size(90.dp)
                         .align(alignment = Alignment.TopStart)
@@ -141,7 +138,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen,
                 }
 
                 IconButton( //ABOUT BUTTON
-                    onClick = { navigateToAboutUsPage },
+                    onClick = { onItemSelected(2) },
                     modifier = Modifier
                         .size(90.dp)
                         .align(alignment = Alignment.TopStart)
@@ -181,7 +178,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen,
                 }
 
                 IconButton( //PROFILE BUTTON
-                    onClick = { navigateToProfilePage },
+                    onClick = { onItemSelected(3) },
                     modifier = Modifier
                         .size(90.dp)
                         .align(alignment = Alignment.TopStart)
@@ -219,8 +216,8 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen,
 }
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview(){
+fun CustomNavBarPreview(){
     MobileProjectTheme {
-        CustomNavigationBar(currentScreen = Screen.Home)
+        CustomNavigationBar()
     }
 }

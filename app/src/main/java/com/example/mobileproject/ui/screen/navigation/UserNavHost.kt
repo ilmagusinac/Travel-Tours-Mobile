@@ -52,25 +52,11 @@ fun UserNavHost(
                 navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") },
                 navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
             )
-            CustomNavigationBar(
-                currentScreen = Screen.Home,
-                navigateToHomePage = {navController.navigate("${HomeDestination.route}")},
-                navigateToToursPage = { navController.navigate("${ToursDestination.route}") },
-                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") },
-                navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
-            )
         }
         composable(route = AboutDestination.route) {
             AboutScreen(
                 navigateToToursPage = { navController.navigate("${ToursDestination.route}") },
                 navigateToHomePage = { navController.navigate("${HomeDestination.route}") },
-                navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
-            )
-            CustomNavigationBar(
-                currentScreen = Screen.Home,
-                navigateToHomePage = {navController.navigate("${HomeDestination.route}")},
-                navigateToToursPage = { navController.navigate("${ToursDestination.route}") },
-                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") },
                 navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
             )
         }
@@ -86,40 +72,21 @@ fun UserNavHost(
                 navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") },
                 navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
             )
-            CustomNavigationBar(
-                currentScreen = Screen.Home,
-                navigateToHomePage = {navController.navigate("${HomeDestination.route}")},
-                navigateToToursPage = { navController.navigate("${ToursDestination.route}") },
-                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") },
-                navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
-            )
         }
-        /*composable(route = ProfileDestination.route) {
+        composable(route = ProfileDestination.route) {
             ProfileScreen(
                 navigateToToursPage = { navController.navigate("${ToursDestination.route}") },
                 navigateToHomePage = { navController.navigate("${HomeDestination.route}") },
-                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") }
+                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}")},
+                onLogout = {},
+                userId = 1
             )
-            CustomNavigationBar(
-                currentScreen = Screen.Home,
-                navigateToHomePage = {navController.navigate("${HomeDestination.route}")},
-                navigateToToursPage = { navController.navigate("${ToursDestination.route}") },
-                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") },
-                navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
-            )
-        }*/
+        }
         composable(route = ToursDestination.route) {
             ToursScreen(
                 navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") },
                 navigateToHomePage = { navController.navigate("${HomeDestination.route}") },
                 navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") }
-            )
-            CustomNavigationBar(
-                currentScreen = Screen.Home,
-                navigateToHomePage = {navController.navigate("${HomeDestination.route}")},
-                navigateToToursPage = { navController.navigate("${ToursDestination.route}") },
-                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") },
-                navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
             )
         }
         /*composable(

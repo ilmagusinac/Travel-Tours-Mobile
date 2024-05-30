@@ -517,7 +517,14 @@ fun AboutScreen(modifier: Modifier = Modifier,
                 Spacer(modifier = Modifier.height(10.dp))
             }
         }
-        CustomNavigationBar(currentScreen = Screen.About)
+        CustomNavigationBar(currentScreen = Screen.About,
+            onItemSelected = { item ->
+                when (item) {
+                    0 -> navigateToHomePage()
+                    1 -> navigateToToursPage()
+                    3 -> navigateToProfilePage()
+                }
+            })
     }
 }
 @Preview(widthDp = 430, heightDp = 932)

@@ -37,6 +37,7 @@ import com.example.mobileproject.R
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 import kotlinx.coroutines.launch
 import android.widget.Toast
+import androidx.compose.material3.TextButton
 import androidx.compose.ui.platform.LocalContext
 import com.example.mobileproject.model.viewModel.AppViewModelProvider
 import com.example.mobileproject.model.viewModel.SignInViewModel
@@ -196,7 +197,7 @@ fun SignInPage(modifier: Modifier = Modifier,
                             if (success) {
                                 errorMessage = null
                                 showToast = true
-                                navigateToHomePage
+                                navigateToHomePage()
                             } else {
                                 errorMessage = message
                             }
@@ -257,7 +258,7 @@ fun SignInPage(modifier: Modifier = Modifier,
                     //.align(alignment = Alignment.TopStart)
                     .offset(x = 50.dp,
                         y = 10.dp)
-                    .clickable { navigateToSignUpPage }
+                    .clickable { navigateToSignUpPage() }
             )
             Icon(
                 painter = painterResource(id = R.drawable.more_circle),

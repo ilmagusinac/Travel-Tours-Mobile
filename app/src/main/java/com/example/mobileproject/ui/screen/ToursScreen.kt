@@ -133,7 +133,14 @@ fun ToursScreen(modifier: Modifier = Modifier,
                 TourGrid(tours = uiState.toursList)
             }
             // Navigation bar
-            CustomNavigationBar(currentScreen = Screen.Tours)
+            CustomNavigationBar(currentScreen = Screen.Tours,
+                onItemSelected = { item ->
+                    when (item) {
+                        0 -> navigateToHomePage()
+                        2 -> navigateToAboutUsPage()
+                        3 -> navigateToProfilePage()
+                    }
+                })
         }
         // Navigation bar
         //CustomNavigationBar(currentScreen = Screen.Tours)

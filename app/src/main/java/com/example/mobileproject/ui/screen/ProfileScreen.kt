@@ -374,7 +374,13 @@ fun ProfileScreen(modifier: Modifier = Modifier,
             }
 
         }
-        CustomNavigationBar(currentScreen = Screen.Profile)
+        CustomNavigationBar(currentScreen = Screen.Profile,onItemSelected = { item ->
+            when (item) {
+                0 -> navigateToHomePage()
+                1 -> navigateToToursPage()
+                2 -> navigateToAboutUsPage()
+            }
+        })
     }
 }
 

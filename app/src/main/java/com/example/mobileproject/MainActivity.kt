@@ -82,9 +82,8 @@ class MainActivity : ComponentActivity() {
                     //SignInPage()
                     //EditProfileScreen(userId = 4)
                     //ToursScreen()
-                    ProfileScreen(userId = 1){ /*onlogout*/}
                     //ToursViewScreen(tourId = 4, userId = 7)
-                    SignUpPage()
+                    // FIX: OVDE NE SME NISTA DA STOJI POJAVLJUJU SE GHOST SCREENOVI
                     UserNavHost(navController = rememberNavController())
                 }
             }

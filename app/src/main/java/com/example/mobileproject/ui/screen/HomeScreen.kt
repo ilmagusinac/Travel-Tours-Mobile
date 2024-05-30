@@ -210,12 +210,10 @@ fun HomeScreen(modifier: Modifier = Modifier,
                     .align(Alignment.CenterHorizontally)
             )
 
-            Spacer(modifier = Modifier.height(25.dp))
 
             // Description text in a LazyColumn
             Box(
                 modifier = Modifier
-                    .fillMaxSize()
                     .padding(start = 16.dp, end = 16.dp)
                     .align(Alignment.CenterHorizontally)
             ) {
@@ -223,7 +221,7 @@ fun HomeScreen(modifier: Modifier = Modifier,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(200.dp)
-                        .padding(top = 25.dp, bottom = 38.dp)
+                        .padding(top = 25.dp, bottom = 0.dp)
                 ) {
                     item {
                         Text(
@@ -243,11 +241,18 @@ fun HomeScreen(modifier: Modifier = Modifier,
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
         }
 
         // Navigation bar
-        CustomNavigationBar(currentScreen = Screen.Home)
+        CustomNavigationBar(
+            currentScreen = Screen.Home,
+            onItemSelected = { item ->
+                when (item) {
+                    1 -> navigateToToursPage()
+                    2 -> navigateToAboutUsPage()
+                    3 -> navigateToProfilePage()
+                }
+            })
     }
 }
 
@@ -255,6 +260,6 @@ fun HomeScreen(modifier: Modifier = Modifier,
 @Composable
 fun HomeScreenPreview() {
     MobileProjectTheme {
-        HomeScreen()
+        HomeScreen(Modifier)
     }
 }

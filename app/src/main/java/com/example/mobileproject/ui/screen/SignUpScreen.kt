@@ -631,7 +631,7 @@ fun SignUpPage(
                             if (success) {
                                 errorMessage = null
                                 showToast = true
-                                // Handle successful registration, e.g., navigate to login screen
+                                navigateToSignInPage()
                             } else {
                                 errorMessage = message
                             }
@@ -671,14 +671,14 @@ fun SignUpPage(
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = "Sign up if you don’t have an account",
+                text = "Sign in if you have an account",
                 color = Color.Black,
                 style = TextStyle(
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium),
                 modifier = Modifier
                     .offset(x = 50.dp, y = 10.dp)
-                    .clickable { /* Handle sign up navigation */ }
+                    .clickable { navigateToSignInPage() }
             )
             Icon(
                 painter = painterResource(id = R.drawable.more_circle),
