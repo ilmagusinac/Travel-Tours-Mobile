@@ -82,7 +82,8 @@ class MainActivity : ComponentActivity() {
                     //SignInPage()
                     //EditProfileScreen(userId = 4)
                     //ToursScreen()
-                    ProfileScreen(userId = 6){ /*onlogout*/}
+                    //ProfileScreen(userId = 6){ /*onlogout*/}
+                    ToursViewScreen(tourId = 2, 4)
                 }
             }
         }

@@ -37,6 +37,13 @@ object AppViewModelProvider {
                 userApplication().container.tourRepository
             )
         }
+        initializer {
+            ToursViewViewModel(
+                userApplication().container.tourRepository,
+                userApplication().container.attractionRepository,
+                userApplication().container.reservationRepository
+            )
+        }
     }
 }
 

@@ -24,4 +24,7 @@ interface ReservationsDao {
 
     @Query("SELECT * FROM Reservations WHERE id = :id")
     fun getReservation(id: Int): Flow<Reservations>
+
+    @Query("SELECT * FROM Reservations WHERE user_id = :userId AND tour_id = :tourId")
+    fun getReservationByUserAndTour(userId: Int, tourId: Int): Flow<Reservations?>
 }
