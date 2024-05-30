@@ -85,6 +85,7 @@ fun ProfileScreen(modifier: Modifier = Modifier,
     val userUiState by viewModel::userUiState
     val toursUiState by viewModel::toursUiState
     val context = LocalContext.current
+    val bookedToursUiState by viewModel::bookedToursUiState
 
     var email = "example@gmail.com"
     var username = "username"

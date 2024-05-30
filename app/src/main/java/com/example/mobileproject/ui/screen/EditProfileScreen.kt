@@ -52,7 +52,7 @@ import kotlinx.coroutines.launch
 import android.widget.Toast
 
 object EditProfileDestination : NavigationDestination {
-    override val route = "edit"
+    override val route = "edit/{userId}"
     override val title = "Edit"
 }
 
@@ -222,7 +222,7 @@ fun EditProfileScreen(modifier: Modifier = Modifier,
                                 if (success) {
                                     errorMessage = null
                                     showToast = true
-                                    navigateToProfilePage
+                                    navigateToProfilePage()
                                 } else {
                                     errorMessage = message
                                 }

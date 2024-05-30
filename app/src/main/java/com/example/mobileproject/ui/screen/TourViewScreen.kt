@@ -55,6 +55,7 @@ object TourViewDestination : NavigationDestination {
     override val route = "tourview/{tourId}"
     override val title = "Tourview"
 }
+
 /*
 @Composable
 fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier,
@@ -215,7 +216,10 @@ fun ToursViewScreen(
     tourId: Int,
     userId: Int,
     modifier: Modifier = Modifier,
-    viewModel: ToursViewViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: ToursViewViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    navigateToHomePage: () -> Unit = {},
+    navigateToAboutUsPage: () -> Unit = {},
+    navigateToProfilePage: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current

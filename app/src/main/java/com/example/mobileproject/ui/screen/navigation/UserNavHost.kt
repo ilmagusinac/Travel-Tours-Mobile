@@ -74,11 +74,17 @@ fun UserNavHost(
                 navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
             )
         }
-        composable(route = EditProfileDestination.route) {
+        composable(
+            route = "${EditProfileDestination.route}/{userId}",
+            arguments = listOf(navArgument("userId") { type = NavType.IntType })
+        ) { navBackStackEntry ->
+            val userId = navBackStackEntry.arguments?.getInt("userId") ?: return@composable
             EditProfileScreen(
+                userId = userId,
                 navigateToToursPage = { navController.navigate("${ToursDestination.route}") },
                 navigateToHomePage = { navController.navigate("${HomeDestination.route}") },
-                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") }
+                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") },
+                navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
             )
             CustomNavigationBar(
                 currentScreen = Screen.Home,
@@ -88,7 +94,7 @@ fun UserNavHost(
                 navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
             )
         }
-        composable(route = ProfileDestination.route) {
+        /*composable(route = ProfileDestination.route) {
             ProfileScreen(
                 navigateToToursPage = { navController.navigate("${ToursDestination.route}") },
                 navigateToHomePage = { navController.navigate("${HomeDestination.route}") },
@@ -101,7 +107,7 @@ fun UserNavHost(
                 navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") },
                 navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") }
             )
-        }
+        }*/
         composable(route = ToursDestination.route) {
             ToursScreen(
                 navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") },

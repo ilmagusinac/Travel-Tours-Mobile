@@ -434,6 +434,7 @@ object SignUpDestination : NavigationDestination {
 @Composable
 fun SignUpPage(
     modifier: Modifier = Modifier,
+    navigateToSignInPage: ()-> Unit={},
     viewModel: SignUpViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val context = LocalContext.current
