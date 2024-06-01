@@ -55,16 +55,16 @@ fun ToursScreen(modifier: Modifier = Modifier,
                 navigateToHomePage: ()-> Unit ={},
                 navigateToAboutUsPage: ()-> Unit ={},
                 navigateToProfilePage: ()-> Unit ={},
-
+                navigateToViewTour: (Int)-> Unit ={},
                 viewModel: ToursViewModel = viewModel(factory = AppViewModelProvider.Factory)
                 ) {
     val uiState by viewModel.uiState.collectAsState()
 
-        Box(
-            modifier = modifier
-                .requiredWidth(430.dp)
-                .requiredHeight(932.dp)
-                .background(color = Color(0xfff6f6f6))
+    Box(
+        modifier = modifier
+            .requiredWidth(430.dp)
+            .requiredHeight(932.dp)
+            .background(color = Color(0xfff6f6f6))
 
         ) {
             Column(
@@ -130,7 +130,7 @@ fun ToursScreen(modifier: Modifier = Modifier,
                 // Attraction grid
                 //AttractionGrid()
                 // Tours grid
-                TourGrid(tours = uiState.toursList)
+                TourGrid(tours = uiState.toursList,navigateToViewTour)
             }
             // Navigation bar
             CustomNavigationBar(currentScreen = Screen.Tours,
@@ -157,123 +157,7 @@ fun ToursScreen(modifier: Modifier = Modifier,
         TourImage(R.drawable.tour4)
     )
 
-    /*
-@Composable
-fun TourCard(
-    imageRes: Int,
-    title: String,
-    date: String,
-    onClick: () -> Unit
-)  {
-    Box(
-        modifier = Modifier
-            .size(width = 150.dp, height = 220.dp)
-            .clip(shape = RoundedCornerShape(16.dp))
-            .background(color = Color.Gray)
-            .clickable(onClick = onClick)
-    ) {
-        Image(
-            painter = painterResource(id = imageRes),
-            contentDescription = "Photo",
-            modifier = Modifier
-                .fillMaxSize()
-                .clip(shape = RoundedCornerShape(16.dp))
-        )
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(18.dp)
-        ) {
-            Text(
-                text = title,
-                color = Color.White,
-                style = TextStyle(
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            )
-            Text(
-                text = date,
-                color = Color.White,
-                style = TextStyle(fontSize = 12.sp)
-            )
-        }
-    }
-}
-
-@Composable
-fun AttractionGrid() {
-    val tours = listOf(
-        TourInfo(
-            imageRes = R.drawable.tour1,
-            title = "Western Strait",
-            description = "5 attractions",
-            attractions = listOf(
-                Attraction("Attraction 1", "Description 1", R.drawable.globe),
-                Attraction("Attraction 2", "Description 2", R.drawable.globe)
-            )
-        ),
-        TourInfo(
-            imageRes = R.drawable.tour2,
-            title = "Lake cottage",
-            description = "3 attractions",
-            attractions = listOf(
-                Attraction("Attraction 1", "Description 1", R.drawable.globe),
-                Attraction("Attraction 2", "Description 2", R.drawable.globe)
-            )
-        ),
-        TourInfo(
-            imageRes = R.drawable.tour3,
-            title = "Lake cottage",
-            description = "3 attractions",
-            attractions = listOf(
-                Attraction("Attraction 1", "Description 1", R.drawable.globe),
-                Attraction("Attraction 2", "Description 2", R.drawable.globe)
-            )
-        ),
-        TourInfo(
-            imageRes = R.drawable.tour4,
-            title = "Lake cottage",
-            description = "3 attractions",
-            attractions = listOf(
-                Attraction("Attraction 1", "Description 1", R.drawable.globe),
-                Attraction("Attraction 2", "Description 2", R.drawable.globe)
-            )
-        )
-    )
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 180.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        for (i in tours.indices step 2) {
-            Row(
-                modifier = Modifier.padding(bottom = 20.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                TourCard(
-                    imageRes = tours[i].imageRes,
-                    title = tours[i].title,
-                    date = tours[i].description,
-                    onClick = { /* navigateToTourView(tours[i]) */ }
-                )
-                Spacer(modifier = Modifier.width(30.dp))
-                if (i + 1 < tours.size) {
-                    TourCard(
-                        imageRes = tours[i + 1].imageRes,
-                        title = tours[i + 1].title,
-                        date = tours[i + 1].description,
-                        onClick = { /* navigateToTourView(tours[i + 1]) */ }
-                    )
-                }
-            }
-        }
-    }
-}
-*/@Composable
+    @Composable
     fun TourCard(
         title: String,
         destination: String,
@@ -318,7 +202,7 @@ fun AttractionGrid() {
     }
 
     @Composable
-    fun TourGrid(tours: List<ToursDetails>) {
+    fun TourGrid(tours: List<ToursDetails>,navigateToViewTour: (Int) -> Unit) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -335,7 +219,7 @@ fun AttractionGrid() {
                         title = tours[i].name,
                         destination = tours[i].destination,
                         imageRes = image1,
-                        onClick = { /* navigateToTourView(tours[i]) */ }
+                        onClick = {navigateToViewTour(tours[i].id)}
                     )
                     Spacer(modifier = Modifier.width(30.dp))
                     if (i + 1 < tours.size) {
@@ -344,7 +228,7 @@ fun AttractionGrid() {
                             title = tours[i + 1].name,
                             destination = tours[i + 1].destination,
                             imageRes = image2,
-                            onClick = { /* navigateToTourView(tours[i + 1]) */ }
+                            onClick = {navigateToViewTour(tours[i+1].id) }
                         )
                     }
                 }

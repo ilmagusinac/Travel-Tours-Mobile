@@ -55,9 +55,9 @@ class ProfileViewModel(
         }
     }
 
-    fun fetchPreviousTours() {
+    fun fetchPreviousTours(userId:Int) {
         viewModelScope.launch {
-            tourRepository.getAllTours().collect { tours ->
+            tourRepository.getUserPreviousTours(userId).collect { tours ->
                 toursUiState = ToursUiState(toursList = tours.filter { it.id >= 5 }.map { it.toToursDetails() })
             }
         }

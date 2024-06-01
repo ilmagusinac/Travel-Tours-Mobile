@@ -36,8 +36,12 @@ interface ToursDao{
             "WHERE Tours.id = :id")
     fun getTourAttraction(id: Int): Flow<List<TourAttraction>>
 
-    @Query("SELECT * FROM Tours")
+    @Query("SELECT * FROM Tours WHERE date>DATE('now')")
     fun getAllTours(): Flow<List<Tours>>
+    @Query("SELECT * FROM Tours WHERE date<DATE('now')")
+    fun getPreviousTours(): Flow<List<Tours>>
+    @Query("DELETE FROM Tours WHERE 1=1")
+    fun deleteAll()
 
     @Query("SELECT * FROM Reservations WHERE user_id = :userId")
     fun getUserBookedTours(userId: Int): Flow<List<Reservations>>

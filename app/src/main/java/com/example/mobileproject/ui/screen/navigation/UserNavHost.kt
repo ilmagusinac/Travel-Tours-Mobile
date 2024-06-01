@@ -86,28 +86,24 @@ fun UserNavHost(
             ToursScreen(
                 navigateToProfilePage = { navController.navigate("${ProfileDestination.route}") },
                 navigateToHomePage = { navController.navigate("${HomeDestination.route}") },
-                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") }
+                navigateToAboutUsPage = { navController.navigate("${AboutDestination.route}") },
+                navigateToViewTour = { navController.navigate("${TourViewDestination.route}/${it}") }
             )
         }
-        /*composable(
-            route = TourViewDestination.route,
-            arguments = listOf(navArgument("tourId") { type = NavType.StringType })
+        composable(
+            route = TourViewDestination.routeWithArgs,
+            arguments = listOf(navArgument("tourId") { type = NavType.IntType })
         ) { navBackStackEntry ->
-            val tourId = navBackStackEntry.arguments?.getString("tourId") ?: return@composable
+            val tourId = navBackStackEntry.arguments?.getInt("tourId") ?: return@composable
             ToursViewScreen(
                 tourId = tourId,
+                userId = 1,
                 navigateToProfilePage = { navController.navigate(ProfileDestination.route) },
+                navigateToToursPage = { navController.navigate("${ToursDestination.route}") },
                 navigateToHomePage = { navController.navigate(HomeDestination.route) },
                 navigateToAboutUsPage = { navController.navigate(AboutDestination.route) }
             )
-            CustomNavigationBar(
-                currentScreen = Screen.Home,
-                navigateToHomePage = { navController.navigate(HomeDestination.route) },
-                navigateToToursPage = { navController.navigate(ToursDestination.route) },
-                navigateToAboutUsPage = { navController.navigate(AboutDestination.route) },
-                navigateToProfilePage = { navController.navigate(ProfileDestination.route) }
-            )
-        }*/
+        }
 
 
     }

@@ -52,164 +52,11 @@ import com.example.mobileproject.model.viewModel.ToursViewViewModel
 import com.example.mobileproject.ui.screen.navigation.NavigationDestination
 
 object TourViewDestination : NavigationDestination {
-    override val route = "tourview/{tourId}"
+    override val route = "tourview"
     override val title = "Tourview"
+    const val tourIdArg = "tourId"
+    val routeWithArgs = "$route/{$tourIdArg}"
 }
-
-/*
-@Composable
-fun ToursViewScreen(tour: TourInfo, modifier: Modifier = Modifier,
-                    tourId: String,
-                    navigateToHomePage: ()-> Unit ={},
-                    navigateToAboutUsPage: ()-> Unit ={},
-                    navigateToProfilePage: ()-> Unit ={},
-                    navigateToToursPage: ()-> Unit ={}) {
-    Box(
-        modifier = modifier
-
-            .requiredWidth(430.dp)
-            .requiredHeight(932.dp)
-            .background(color = Color(0xfff6f6f6))
-
-            .requiredWidth(width = 430.dp)
-            .requiredHeight(height = 932.dp)
-            //.background(color = Color(0xfff6f6f6))
-    ) {
-        Image(
-            painter = painterResource(id = tour.imageRes),
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(530.dp)
-                .offset(y = (-60).dp)
-                .align(Alignment.TopCenter),
-            contentScale = ContentScale.Crop
-        )
-
-        Text(
-            text = tour.title,
-            style = TextStyle(
-                color = Color.White,
-                fontSize = 42.sp,
-                fontWeight = FontWeight.W300
-            ),
-            textAlign = TextAlign.Center,
-            modifier = Modifier
-                .padding(bottom = 16.dp)
-                .offset(x = 80.dp, y = 270.dp)
-        )
-
-        IconButton(
-            onClick = { navigateToToursPage },
-            modifier = Modifier.offset(x = 15.dp, y = 50.dp)
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.arrow),
-                contentDescription = "Favorite",
-                tint = Color.White
-            )
-        }
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(500.dp)
-                .align(Alignment.Center)
-                .offset(y = 150.dp)
-                .clip(shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp))
-                .background(Color.White)
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp)
-            ) {
-                Text(
-                    text = "About ${tour.title}",
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 22.sp
-                    ),
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-
-                Text(
-                    text = tour.description,
-                    style = TextStyle(
-                        fontSize = 18.sp
-                    ),
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-
-                Text(
-                    text = "Attractions",
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 22.sp
-                    ),
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
-
-                tour.attractions.forEach { attraction ->
-                    Row(
-                        horizontalArrangement = Arrangement.Start,
-                        modifier = Modifier.padding(bottom = 8.dp)
-                    ) {
-                        Icon(
-                            painter = painterResource(id = attraction.iconRes),
-                            contentDescription = attraction.name,
-                            tint = Color.Red,
-                            modifier = Modifier
-                                .size(30.dp)
-                                .padding(end = 8.dp)
-                        )
-
-                        Column {
-                            Text(
-                                text = attraction.name,
-                                fontWeight = FontWeight.Bold,
-                                style = TextStyle(fontSize = 20.sp)
-                            )
-                            Text(
-                                text = attraction.description,
-                                fontSize = 18.sp,
-                                color = Color.Gray
-                            )
-                        }
-                    }
-                }
-
-                Button(
-                    onClick = { /* TODO: Implement booking logic */ },
-                    shape = RoundedCornerShape(36.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
-                    modifier = Modifier
-                        .padding(top = 32.dp)
-                        .fillMaxWidth()
-                        .height(70.dp)
-                ) {
-                    Text(
-                        text = "Book a trip",
-                        color = Color.White,
-                        style = TextStyle(
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
-                }
-            }
-        }
-
-        CustomNavigationBar(currentScreen = Screen.Tours)
-    }
-}
-
-@Preview(widthDp = 430, heightDp = 932)
-@Composable
-fun ToursViewScreenPreview() {
-    MobileProjectTheme {
-        ToursViewScreen(tour = sampleTour, Modifier, "5")
-    }
-}
-*/
 
 @Composable
 fun ToursViewScreen(
@@ -219,6 +66,7 @@ fun ToursViewScreen(
     viewModel: ToursViewViewModel = viewModel(factory = AppViewModelProvider.Factory),
     navigateToHomePage: () -> Unit = {},
     navigateToAboutUsPage: () -> Unit = {},
+    navigateToToursPage: () -> Unit = {},
     navigateToProfilePage: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -401,7 +249,15 @@ fun ToursViewScreen(
                     }
                 }
 
-                CustomNavigationBar(currentScreen = Screen.Tours)
+                CustomNavigationBar(currentScreen = Screen.Tours,
+                    onItemSelected = { item ->
+                        when (item) {
+                            0 -> navigateToHomePage()
+                            1 -> navigateToToursPage()
+                            2 -> navigateToAboutUsPage()
+                            3 -> navigateToProfilePage()
+                        }
+                    })
             }
         }
     }

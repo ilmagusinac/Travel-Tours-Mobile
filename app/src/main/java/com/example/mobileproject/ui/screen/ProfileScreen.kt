@@ -92,7 +92,7 @@ fun ProfileScreen(modifier: Modifier = Modifier,
 
     LaunchedEffect(Unit) {
         viewModel.fetchUserData(userId)
-        viewModel.fetchPreviousTours()
+        viewModel.fetchPreviousTours(userId)
         viewModel.fetchBookedTours(userId)
     }
 
