@@ -53,7 +53,7 @@ fun SplashScreen(modifier: Modifier = Modifier,
             contentAlignment = Alignment.Center
         ) {
             Button(
-                onClick = { navigateToSignInPage },
+                onClick = { navigateToSignInPage() },
                 shape = RoundedCornerShape(36.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
                 modifier = Modifier

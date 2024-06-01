@@ -76,7 +76,7 @@ fun SignInPage(modifier: Modifier = Modifier,
     ) {
 
         IconButton(
-            onClick = { navigateToSplashPage },
+            onClick = { navigateToSplashPage() },
             modifier = Modifier.offset(x=15.dp, y=50.dp)
         ) {
             Icon(

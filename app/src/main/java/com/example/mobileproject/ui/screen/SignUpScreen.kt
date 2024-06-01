@@ -460,7 +460,7 @@ fun SignUpPage(
             .background(color = Color.White)
     ) {
         IconButton(
-            onClick = { /* Handle navigation back */ },
+            onClick = { navigateToSignInPage() },
             modifier = Modifier.offset(x = 15.dp, y = 50.dp)
         ) {
             Icon(

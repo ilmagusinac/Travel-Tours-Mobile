@@ -23,7 +23,6 @@ interface AttractionsDao{
 
     @Delete
     suspend fun delete(attraction: Attractions)
-
     @Query("SELECT * FROM Attractions WHERE id = :id")
     fun getAttraction(id: Int): Flow<Attractions>
 

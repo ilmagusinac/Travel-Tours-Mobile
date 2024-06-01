@@ -31,7 +31,7 @@ import com.example.mobileproject.ui.screen.ToursViewScreen
 fun UserNavHost(
     navController: NavHostController
 ){
-    NavHost(navController = navController, startDestination = SignInDestination.route){
+    NavHost(navController = navController, startDestination = SplashDestination.route){
         composable(route = SignInDestination.route){
             SignInPage(
                 navigateToSignUpPage ={ navController.navigate("${SignUpDestination.route}")},
