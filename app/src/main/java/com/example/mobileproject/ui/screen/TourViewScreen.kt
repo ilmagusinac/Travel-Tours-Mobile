@@ -132,7 +132,7 @@ fun ToursViewScreen(
                 )
 
                 IconButton(
-                    onClick = { },
+                    onClick = { navigateToToursPage() },
                     modifier = Modifier.offset(x = 15.dp, y = 50.dp)
                 ) {
                     Icon(

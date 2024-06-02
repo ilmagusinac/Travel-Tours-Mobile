@@ -51,7 +51,7 @@ fun CustomNavigationBar(modifier: Modifier = Modifier, currentScreen: Screen=Scr
                 .align(alignment = Alignment.TopStart)
                 .offset(
                     x = 0.dp,
-                    y = 920.dp
+                    y = 720.dp
                 )
         ) {
             Box(
