@@ -306,7 +306,7 @@ fun ProfileScreen(modifier: Modifier = Modifier,
             )
         }
         Button(//EDIT PROFILE BUTTON
-            onClick = { navigateToEditProfilePage },
+            onClick = { navigateToEditProfilePage() },
             shape = RoundedCornerShape(36.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color(0xff0373f3)),
             modifier = Modifier

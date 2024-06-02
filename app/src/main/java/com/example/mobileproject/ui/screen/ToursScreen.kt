@@ -39,6 +39,7 @@ import com.example.mobileproject.ui.theme.MobileProjectTheme
 import com.example.mobileproject.model.CustomNavigationBar
 import com.example.mobileproject.model.Screen
 import com.example.mobileproject.model.TourInfo
+import com.example.mobileproject.model.daos.ToursDao_Impl
 import com.example.mobileproject.model.viewModel.AppViewModelProvider
 import com.example.mobileproject.model.viewModel.ToursDetails
 import com.example.mobileproject.model.viewModel.ToursViewModel
@@ -147,14 +148,15 @@ fun ToursScreen(modifier: Modifier = Modifier,
     }
 
     data class TourImage(
+        val tourId: Int,
         val imageRes: Int
     )
 
     val tourImages = listOf(
-        TourImage(R.drawable.tour1),
-        TourImage(R.drawable.tour2),
-        TourImage(R.drawable.tour3),
-        TourImage(R.drawable.tour4)
+        TourImage(tourId = 1, imageRes = R.drawable.tour1),
+        TourImage(tourId = 2, imageRes = R.drawable.tour2),
+        TourImage(tourId = 3, imageRes = R.drawable.tour3),
+        TourImage(tourId = 4, imageRes = R.drawable.tour4)
     )
 
     @Composable
@@ -214,21 +216,23 @@ fun ToursScreen(modifier: Modifier = Modifier,
                     modifier = Modifier.padding(bottom = 20.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    val image1 = tourImages[Random.nextInt(tourImages.size)].imageRes
+                    val tour1=tours[i]
+                    val image1 = tourImages.find {it.tourId == tour1.id}?.imageRes ?: R.drawable.tour1
                     TourCard(
-                        title = tours[i].name,
-                        destination = tours[i].destination,
+                        title = tour1.name,
+                        destination = tour1.destination,
                         imageRes = image1,
-                        onClick = {navigateToViewTour(tours[i].id)}
+                        onClick = {navigateToViewTour(tour1.id)}
                     )
                     Spacer(modifier = Modifier.width(30.dp))
                     if (i + 1 < tours.size) {
-                        val image2 = tourImages[Random.nextInt(tourImages.size)].imageRes
+                        val tour2= tours[i+1]
+                        val image2 = tourImages.find { it.tourId == tour2.id }?.imageRes ?: R.drawable.tour2
                         TourCard(
-                            title = tours[i + 1].name,
-                            destination = tours[i + 1].destination,
+                            title = tour2.name,
+                            destination = tour2.destination,
                             imageRes = image2,
-                            onClick = {navigateToViewTour(tours[i+1].id) }
+                            onClick = {navigateToViewTour(tour2.id) }
                         )
                     }
                 }
