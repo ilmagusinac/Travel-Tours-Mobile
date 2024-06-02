@@ -99,7 +99,6 @@ class ToursViewModel(private val tourRepository: TourRepository) : ViewModel() {
 
     init {
         fetchTours()
-        insertSampleTours()
     }
 
     private fun fetchTours() {
@@ -114,17 +113,5 @@ class ToursViewModel(private val tourRepository: TourRepository) : ViewModel() {
         }
     }
 
-    private fun insertSampleTours() {
-        viewModelScope.launch {
-            val sampleTours = listOf(
-                Tours(name = "Western Strait", destination = "22.2.2022", description = "Beautiful Western Strait tour", date = "2023-07-01"),
-                Tours(name = "Eastern Peaks", destination = "15.3.2022", description = "Exciting Eastern Peaks tour", date = "2024-08-15"),
-                Tours(name = "Southern Shores", destination = "10.4.2022", description = "Relaxing Southern Shores tour", date = "2024-09-10"),
-                Tours(name = "Northern Lights", destination = "25.5.2022", description = "Amazing Northern Lights tour", date = "2024-10-25")
-            )
-            sampleTours.forEach { tour ->
-                tourRepository.insert(tour)
-            }
-        }
-    }
+
 }
